@@ -1,36 +1,97 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ProyectoZero.org
 
-## Getting Started
+Portfolio personal y espacio de desarrollo web de Sergio Moreno.
 
-First, run the development server:
+## Sobre el Proyecto
+
+ProyectoZero es mi portfolio personal donde combino mi pasión por el desarrollo web con mi trayectoria profesional. Un espacio moderno y minimalista construido con las últimas tecnologías, donde comparto mi experiencia como desarrollador en formación y TES con más de 20 años de trayectoria sanitaria.
+
+## Características
+
+- **Multiidioma:** Soporte completo para español y euskera
+- **Modo Oscuro:** Tema claro/oscuro con transiciones suaves
+- **Animaciones Fluidas:** Experiencia interactiva con Framer Motion
+- **Contacto Integrado:** Formulario funcional conectado con Mailgun
+- **Responsive:** Diseño adaptable a todos los dispositivos
+- **Performance:** Optimizado con Next.js 15 y React 19
+
+## Stack Tecnológico
+
+- **Framework:** Next.js 16.1.6
+- **UI:** React 19.2.3
+- **Estilos:** Tailwind CSS 4
+- **Animaciones:** Framer Motion
+- **Internacionalización:** next-intl
+- **Temas:** next-themes
+- **Email:** Mailgun.js
+- **Lenguaje:** TypeScript 5
+
+## Desarrollo Local
+
+Clona el repositorio e instala las dependencias:
+
+```bash
+git clone https://github.com/tuusuario/proyectozero.git
+cd proyectozero
+npm install
+```
+
+Inicia el servidor de desarrollo:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre [http://localhost:3000](http://localhost:3000) y verás la aplicación corriendo.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Variables de Entorno
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Crea un archivo `.env.local` con las siguientes variables:
 
-## Learn More
+```env
+MAILGUN_API_KEY=tu_api_key
+MAILGUN_DOMAIN=tu_dominio
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Scripts Disponibles
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `npm run dev` - Inicia el servidor de desarrollo
+- `npm run build` - Genera el build de producción
+- `npm start` - Inicia el servidor de producción
+- `npm run lint` - Ejecuta el linter
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Despliegue
 
-## Deploy on Vercel
+El proyecto está desplegado en [Vercel](https://vercel.com) y disponible en:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Producción:** [proyectozero.org](https://proyectozero.org)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Cada push a `main` despliega automáticamente gracias a la integración de Vercel con Git.
+
+## Estructura del Proyecto
+
+```
+proyectozero/
+├── app/
+│   ├── [locale]/        # Rutas internacionalizadas
+│   └── api/             # API routes
+├── components/          # Componentes reutilizables
+├── lib/                 # Utilidades y helpers
+├── messages/            # Traducciones (es, eu)
+└── public/              # Recursos estáticos
+```
+
+## Filosofía
+
+"Aprender, disfrutar del camino y no perder nunca la sonrisa."
+
+Este proyecto refleja mi compromiso con el aprendizaje continuo y la mejora constante en el desarrollo web.
+
+## Contacto
+
+- **Web:** [proyectozero.org](https://proyectozero.org)
+- **Email:** Disponible a través del formulario de contacto
+
+---
+
+Desarrollado con pasión por Sergio Moreno | 2026
