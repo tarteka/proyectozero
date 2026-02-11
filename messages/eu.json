@@ -1,0 +1,38 @@
+{
+  "hero": {
+    "greeting": "Ongi etorri",
+    "name": "ProyectoZero.org",
+    "role": "Web Garapena",
+    "description": "",
+    "founder": "Sortzailea: Sergio Moreno",
+    "cta": "Ezagutu Gehiago",
+    "contact": "Harremanetan Jarri"
+  },
+  "about": {
+    "title": "Nitaz",
+    "intro": "Sergio deitzen naiz eta Zarautztarra naiz. 20 urte baino gehiago daramat osasun arloan Larrialdietako Osasun Teknikaria (TES) gisa lan egiten, lan bat zeinak liluratu egiten nauen eta non nire erosotasun gunean bainaiz. Baina ez naiz geldirik egoten: duela denbora batzuk Web Aplikazioen Garapena ikastera erabaki nuen, eta programazioa jakin-mina izatetik benetan gozatzen dudan zerbait izatera pasa zen, batez ere backend-a.",
+    "philosophy": "Etengabeko prestakuntzan dagoen garatzaile gisa, aurrera egin dut irmotasunez, jakin-minaz eta ikasteko gogo handiaz. Nire filosofia: ikasi, bidea gozatu eta inoiz ez galdu irribarra.",
+    "education": "Prestakuntza",
+    "degree": "Goi Mailako Tekniko Web Aplikazioen Garapenean (DAW)",
+    "school": "BIRTLH - Eusko Jaurlaritzaren zentro publikoa lanbide heziketako modalitate telematiko eta erdi-aurrezkoan espezializatua",
+    "status": "Titulatua"
+  },
+  "skills": {
+    "title": "Gaitasun Teknikoak",
+    "backend": "Backend",
+    "frontend": "Frontend",
+    "databases": "Datu-baseak",
+    "devops": "DevOps eta Tresnak"
+  },
+  "contact": {
+    "title": "Kontaktua",
+    "subtitle": "Proiektu bat duzu buruan? Hitz egin dezagun!",
+    "name": "Izena",
+    "email": "Emaila",
+    "message": "Mezua",
+    "send": "Mezua Bidali",
+    "sending": "Bidaltzen...",
+    "success": "Mezua ondo bidali da!",
+    "error": "Errorea mezua bidaltzean. Saiatu berriro."
+  }
+}

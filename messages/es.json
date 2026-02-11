@@ -1,0 +1,38 @@
+{
+  "hero": {
+    "greeting": "Bienvenido a",
+    "name": "ProyectoZero.org",
+    "role": "Desarrollo Web",
+    "description": "",
+    "founder": "Fundador: Sergio Moreno",
+    "cta": "Conocer Más",
+    "contact": "Contactar"
+  },
+  "about": {
+    "title": "Sobre Mí",
+    "intro": "Me llamo Sergio y soy de Zarautz. Llevo más de 20 años vinculado al ámbito sanitario como Técnico en Emergencias Sanitarias (TES), un trabajo que me apasiona y donde estoy en mi zona de confort. Pero no me quedo quieto: hace un tiempo decidí estudiar Desarrollo de Aplicaciones Web, y la programación pasó de ser una curiosidad a algo que realmente disfruto, especialmente el backend.",
+    "philosophy": "Como desarrollador en continua formación, avanzo con constancia, curiosidad y muchas ganas de seguir aprendiendo. Mi filosofía: aprender, disfrutar del camino y no perder nunca la sonrisa.",
+    "education": "Formación",
+    "degree": "Técnico Superior en Desarrollo de Aplicaciones Web (DAW)",
+    "school": "BIRTLH - Centro público del Gobierno Vasco especializado en formación profesional telemática y semipresencial",
+    "status": "Graduado"
+  },
+  "skills": {
+    "title": "Habilidades Técnicas",
+    "backend": "Backend",
+    "frontend": "Frontend",
+    "databases": "Bases de Datos",
+    "devops": "DevOps & Herramientas"
+  },
+  "contact": {
+    "title": "Contacto",
+    "subtitle": "¿Tienes un proyecto en mente? ¡Hablemos!",
+    "name": "Nombre",
+    "email": "Email",
+    "message": "Mensaje",
+    "send": "Enviar Mensaje",
+    "sending": "Enviando...",
+    "success": "¡Mensaje enviado con éxito!",
+    "error": "Error al enviar el mensaje. Inténtalo de nuevo."
+  }
+}
