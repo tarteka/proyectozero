@@ -202,7 +202,7 @@ export function Contact() {
           <p className="text-sm md:text-base text-gray-600 dark:text-gray-400">
             O envíame un email directamente a{" "}
             <a
-              href="mailto:info@tarteka.net"
+              href="mailto:sergimoreno@outlook.com"
               className="text-blue-600 dark:text-blue-400 hover:text-purple-600 dark:hover:text-purple-400 font-semibold"
             >
               sergimoreno@outlook.com
