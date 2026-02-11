@@ -51,6 +51,7 @@ Crea un archivo `.env.local` con las siguientes variables:
 ```env
 MAILGUN_API_KEY=tu_api_key
 MAILGUN_DOMAIN=tu_dominio
+CONTACT_EMAIL=your_contact_email_here
 ```
 
 ## Scripts Disponibles

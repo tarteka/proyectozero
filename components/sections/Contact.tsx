@@ -88,7 +88,10 @@ export function Contact() {
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
-        <motion.div variants={itemVariants} className="text-center mb-8 md:mb-12">
+        <motion.div
+          variants={itemVariants}
+          className="text-center mb-8 md:mb-12"
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             {t("title")}
           </h2>
@@ -192,14 +195,17 @@ export function Contact() {
           </form>
         </motion.div>
 
-        <motion.div variants={itemVariants} className="mt-8 md:mt-12 text-center">
+        <motion.div
+          variants={itemVariants}
+          className="mt-8 md:mt-12 text-center"
+        >
           <p className="text-sm md:text-base text-gray-600 dark:text-gray-400">
             O envíame un email directamente a{" "}
             <a
               href="mailto:info@tarteka.net"
               className="text-blue-600 dark:text-blue-400 hover:text-purple-600 dark:hover:text-purple-400 font-semibold"
             >
-              info@tarteka.net
+              sergimoreno@outlook.com
             </a>
           </p>
         </motion.div>
