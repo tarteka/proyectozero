@@ -61,7 +61,7 @@ export function About() {
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             {t("title")}
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full" />
+          <div className="w-24 h-1 bg-linear-to-r from-blue-600 to-purple-600 mx-auto rounded-full" />
         </motion.div>
 
         <div className="max-w-5xl mx-auto space-y-8 md:space-y-12">
@@ -95,7 +95,7 @@ export function About() {
               {/* Social Links */}
               <div className="flex flex-wrap gap-3 md:gap-4">
                 <motion.a
-                  href="https://github.com/sergiomalv"
+                  href="https://github.com/tarteka"
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1 }}
@@ -107,7 +107,7 @@ export function About() {
                 </motion.a>
 
                 <motion.a
-                  href="https://www.linkedin.com/in/sergiomorenoalvarez"
+                  href="https://www.linkedin.com/in/sergio-moreno-tes"
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1 }}
@@ -124,12 +124,12 @@ export function About() {
           {/* Education Card */}
           <motion.div variants={cardVariants}>
             <motion.div
-              className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 p-6 md:p-8 rounded-2xl shadow-xl"
+              className="bg-linear-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 p-6 md:p-8 rounded-2xl shadow-xl"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
               <div className="flex items-center mb-4 md:mb-6">
-                <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-2 md:p-3 rounded-full mr-3 md:mr-4">
+                <div className="bg-linear-to-r from-blue-600 to-purple-600 p-2 md:p-3 rounded-full mr-3 md:mr-4">
                   <HiAcademicCap className="w-6 h-6 md:w-8 md:h-8 text-white" />
                 </div>
                 <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">
@@ -144,7 +144,7 @@ export function About() {
                     alt="BIRTLH"
                     width={80}
                     height={30}
-                    className="object-contain md:w-[120px] md:h-[40px]"
+                    className="object-contain md:w-30 md:h-10"
                   />
                   <div>
                     <h4 className="text-base md:text-xl font-semibold text-gray-800 dark:text-gray-200 mb-1 md:mb-2">

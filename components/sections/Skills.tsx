@@ -13,13 +13,10 @@ import {
   SiDocker,
   SiMysql,
   SiPostgresql,
-  SiMongodb,
-  SiRedis,
   SiLinux,
   SiGit,
   SiPhp,
   SiTypescript,
-  SiPython,
   SiReact,
   SiNextdotjs,
   SiNginx,
@@ -85,7 +82,7 @@ export function Skills() {
     <section
       id="skills"
       ref={ref}
-      className="relative py-12 md:py-20 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 min-h-screen flex flex-col"
+      className="relative py-12 md:py-20 bg-linear-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 min-h-screen flex flex-col"
     >
       <motion.div
         className="container mx-auto px-6 flex-1 flex flex-col justify-center"
@@ -97,7 +94,7 @@ export function Skills() {
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             {t("title")}
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full" />
+          <div className="w-24 h-1 bg-linear-to-r from-blue-600 to-purple-600 mx-auto rounded-full" />
         </motion.div>
 
         <div className="max-w-7xl mx-auto w-full px-2">

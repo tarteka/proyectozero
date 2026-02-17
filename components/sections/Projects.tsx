@@ -89,7 +89,7 @@ export function Projects() {
           <p className="text-lg text-gray-600 dark:text-gray-400 mb-6">
             {t("subtitle")}
           </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full" />
+          <div className="w-24 h-1 bg-linear-to-r from-blue-600 to-purple-600 mx-auto rounded-full" />
         </motion.div>
 
         {loading ? (
@@ -108,7 +108,7 @@ export function Projects() {
                 variants={cardVariants}
                 custom={index}
                 whileHover={{ y: -10 }}
-                className="bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-700 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-shadow border border-gray-200 dark:border-gray-600"
+                className="bg-linear-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-700 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-shadow border border-gray-200 dark:border-gray-600"
               >
                 <div className="flex items-start justify-between mb-4">
                   <HiCode className="w-10 h-10 text-blue-600 dark:text-blue-400" />
@@ -126,7 +126,7 @@ export function Projects() {
                   {repo.name}
                 </h3>
 
-                <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-2 min-h-[3rem]">
+                <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-2 min-h-12">
                   {repo.description || "Proyecto de desarrollo"}
                 </p>
 

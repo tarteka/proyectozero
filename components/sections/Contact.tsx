@@ -80,7 +80,7 @@ export function Contact() {
     <section
       id="contact"
       ref={ref}
-      className="py-12 md:py-20 bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 min-h-screen flex flex-col"
+      className="py-12 md:py-20 bg-linear-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 min-h-screen flex flex-col"
     >
       <motion.div
         className="container mx-auto px-6 flex-1 flex flex-col justify-center"
@@ -98,7 +98,7 @@ export function Contact() {
           <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 mb-6">
             {t("subtitle")}
           </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full" />
+          <div className="w-24 h-1 bg-linear-to-r from-blue-600 to-purple-600 mx-auto rounded-full" />
         </motion.div>
 
         <motion.div
@@ -168,7 +168,7 @@ export function Contact() {
               disabled={status === "loading"}
               whileHover={{ scale: status === "loading" ? 1 : 1.05 }}
               whileTap={{ scale: status === "loading" ? 1 : 0.95 }}
-              className="w-full px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition-shadow disabled:opacity-50 disabled:cursor-not-allowed text-sm md:text-base"
+              className="w-full px-6 md:px-8 py-3 md:py-4 bg-linear-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition-shadow disabled:opacity-50 disabled:cursor-not-allowed text-sm md:text-base"
             >
               {status === "loading" ? t("sending") : t("send")}
             </motion.button>

@@ -31,7 +31,7 @@ ProyectoZero es mi portfolio personal donde combino mi pasión por el desarrollo
 Clona el repositorio e instala las dependencias:
 
 ```bash
-git clone https://github.com/tuusuario/proyectozero.git
+git clone https://github.com/tarteka/proyectozero.git
 cd proyectozero
 npm install
 ```
@@ -71,7 +71,7 @@ Cada push a `main` despliega automáticamente gracias a la integración de Verce
 
 ## Estructura del Proyecto
 
-```
+```bash
 proyectozero/
 ├── app/
 │   ├── [locale]/        # Rutas internacionalizadas
