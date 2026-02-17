@@ -54,7 +54,7 @@ export default async function LocaleLayout({
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="system"
           enableSystem
           storageKey="proyectozero-theme"
         >
