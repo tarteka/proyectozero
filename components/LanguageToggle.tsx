@@ -3,13 +3,14 @@
 import { motion } from "framer-motion";
 import { useLocale } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function LanguageToggle() {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const languages = [
     { code: "es", label: "ES", name: "Español" },
@@ -22,8 +23,25 @@ export function LanguageToggle() {
     setIsOpen(false);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        isOpen &&
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
+
   return (
-    <div className="fixed top-6 right-24 z-50">
+    <div ref={containerRef} className="fixed top-6 right-24 z-50">
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
         className="cursor-pointer p-3 rounded-full bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-shadow font-semibold text-gray-700 dark:text-gray-300"
