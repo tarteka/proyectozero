@@ -16,7 +16,7 @@ export function ThemeToggle() {
   }, []);
 
   const baseClass =
-    "fixed top-6 right-6 z-50 p-3 rounded-full bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700 w-12 h-12 hover:shadow-xl transition-shadow";
+    "cursor-pointer fixed top-6 right-6 z-50 p-3 rounded-full bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700 w-12 h-12 hover:shadow-xl transition-shadow";
 
   if (!mounted) {
     // SSR y primer render cliente iguales
