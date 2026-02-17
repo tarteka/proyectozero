@@ -26,7 +26,7 @@ export function LanguageToggle() {
     <div className="fixed top-6 right-24 z-50">
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
-        className="p-3 rounded-full bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-shadow font-semibold text-gray-700 dark:text-gray-300"
+        className="cursor-pointer p-3 rounded-full bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-shadow font-semibold text-gray-700 dark:text-gray-300"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         aria-label="Toggle language"
@@ -45,7 +45,7 @@ export function LanguageToggle() {
             <button
               key={lang.code}
               onClick={() => handleLanguageChange(lang.code)}
-              className={`w-full px-6 py-3 text-left hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${
+              className={`cursor-pointer w-full px-6 py-3 text-left hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${
                 locale === lang.code
                   ? "bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400"
                   : "text-gray-700 dark:text-gray-300"
