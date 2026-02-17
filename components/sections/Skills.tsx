@@ -17,9 +17,9 @@ import {
   SiGit,
   SiPhp,
   SiTypescript,
-  SiReact,
-  SiNextdotjs,
   SiNginx,
+  SiOracle,
+  SiMongodb,
 } from "react-icons/si";
 import { FaJava } from "react-icons/fa";
 
@@ -30,8 +30,8 @@ const allSkills = [
   { name: "PHP", icon: SiPhp, color: "text-indigo-500" },
   { name: "Java", icon: FaJava, color: "text-red-600" },
   { name: "Angular", icon: SiAngular, color: "text-red-600" },
-  { name: "React", icon: SiReact, color: "text-cyan-500" },
-  { name: "Next.js", icon: SiNextdotjs, color: "text-black dark:text-white" },
+  { name: "Oracle Cloud", icon: SiOracle, color: "text-red-800" },
+  { name: "MongoDB", icon: SiMongodb, color: "text-green-600 dark:text-green-400" },
   { name: "TypeScript", icon: SiTypescript, color: "text-blue-600" },
   { name: "MySQL", icon: SiMysql, color: "text-blue-600" },
   { name: "PostgreSQL", icon: SiPostgresql, color: "text-blue-800" },
