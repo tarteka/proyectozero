@@ -6,6 +6,7 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { HiAcademicCap, HiArrowDown } from "react-icons/hi";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { HiArrowDownTray } from "react-icons/hi2";
 import Image from "next/image";
 
 export function About() {
@@ -116,6 +117,17 @@ export function About() {
                 >
                   <FaLinkedin className="w-4 h-4 md:w-5 md:h-5" />
                   <span className="text-xs md:text-sm font-medium">LinkedIn</span>
+                </motion.a>
+
+                <motion.a
+                  href="/sergio-moreno-cv.pdf"
+                  download="sergio-moreno-cv.pdf"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex items-center gap-2 px-3 md:px-4 py-2 bg-green-600 dark:bg-green-700 text-white rounded-lg hover:bg-green-700 dark:hover:bg-green-600 transition-colors"
+                >
+                  <HiArrowDownTray className="w-4 h-4 md:w-5 md:h-5" />
+                  <span className="text-xs md:text-sm font-medium">CV</span>
                 </motion.a>
               </div>
             </motion.div>
