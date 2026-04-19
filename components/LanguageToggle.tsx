@@ -44,7 +44,7 @@ export function LanguageToggle() {
     <div ref={containerRef} className="fixed top-6 right-24 z-50">
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
-        className="cursor-pointer p-3 rounded-full bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-shadow font-semibold text-gray-700 dark:text-gray-300"
+        className="cursor-pointer w-12 h-12 flex items-center justify-center rounded-full bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-shadow font-semibold text-gray-700 dark:text-gray-300"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         aria-label="Toggle language"
