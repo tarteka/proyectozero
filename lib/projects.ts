@@ -43,9 +43,10 @@ export const projects: Project[] = [
     id: "divisas",
     name: "Mercado de Divisas",
     type: "Web SPA",
-    status: "maintenance",
+    status: "live",
     url: "https://divisas.proyectozero.org",
     repo: "https://github.com/tarteka/divisas",
+    image: "/images/projects/divisas.png",
     stack: ["Angular", "TypeScript", "Bootstrap", "REST API"],
   },
   {
