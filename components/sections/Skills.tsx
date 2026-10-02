@@ -1,10 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
-import { HiArrowDown } from "react-icons/hi";
+import type { IconType } from "react-icons";
 import {
   SiLaravel,
   SiSymfony,
@@ -18,121 +15,102 @@ import {
   SiPhp,
   SiTypescript,
   SiNginx,
-  SiOracle,
   SiMongodb,
+  SiPython,
+  SiFastapi,
 } from "react-icons/si";
 import { FaJava } from "react-icons/fa";
+import { Reveal } from "@/components/ui/Reveal";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { SiOracle } from "@/components/ui/icons";
 
-const allSkills = [
-  { name: "Laravel", icon: SiLaravel, color: "text-red-500" },
-  { name: "Symfony", icon: SiSymfony, color: "text-black dark:text-white" },
-  { name: "Spring Boot", icon: SiSpringboot, color: "text-green-600" },
-  { name: "PHP", icon: SiPhp, color: "text-indigo-500" },
-  { name: "Java", icon: FaJava, color: "text-red-600" },
-  { name: "Angular", icon: SiAngular, color: "text-red-600" },
-  { name: "Oracle Cloud", icon: SiOracle, color: "text-red-800" },
-  { name: "MongoDB", icon: SiMongodb, color: "text-green-600 dark:text-green-400" },
-  { name: "TypeScript", icon: SiTypescript, color: "text-blue-600" },
-  { name: "MySQL", icon: SiMysql, color: "text-blue-600" },
-  { name: "PostgreSQL", icon: SiPostgresql, color: "text-blue-800" },
-  { name: "Docker", icon: SiDocker, color: "text-blue-500" },
-  { name: "Linux", icon: SiLinux, color: "text-yellow-500" },
-  { name: "Git", icon: SiGit, color: "text-orange-600" },
-  { name: "Nginx", icon: SiNginx, color: "text-green-600" },
+interface Skill {
+  name: string;
+  icon: IconType;
+  // undefined → usa el color del texto (logos negros o poco legibles en claro)
+  color?: string;
+}
+
+const groups: { key: "backend" | "frontend" | "databases" | "devops"; skills: Skill[] }[] = [
+  {
+    key: "backend",
+    skills: [
+      { name: "PHP", icon: SiPhp, color: "#777BB4" },
+      { name: "Laravel", icon: SiLaravel, color: "#FF2D20" },
+      { name: "Symfony", icon: SiSymfony },
+      { name: "Java", icon: FaJava, color: "#E76F00" },
+      { name: "Spring Boot", icon: SiSpringboot, color: "#6DB33F" },
+      { name: "Python", icon: SiPython, color: "#3776AB" },
+      { name: "FastAPI", icon: SiFastapi, color: "#009688" },
+    ],
+  },
+  {
+    key: "frontend",
+    skills: [
+      { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
+      { name: "Angular", icon: SiAngular, color: "#DD0031" },
+    ],
+  },
+  {
+    key: "databases",
+    skills: [
+      { name: "MySQL", icon: SiMysql, color: "#4479A1" },
+      { name: "PostgreSQL", icon: SiPostgresql, color: "#4169E1" },
+      { name: "MongoDB", icon: SiMongodb, color: "#47A248" },
+    ],
+  },
+  {
+    key: "devops",
+    skills: [
+      { name: "Docker", icon: SiDocker, color: "#2496ED" },
+      { name: "Linux", icon: SiLinux },
+      { name: "Nginx", icon: SiNginx, color: "#009639" },
+      { name: "Git", icon: SiGit, color: "#F05032" },
+      { name: "Oracle Cloud", icon: SiOracle, color: "#F80000" },
+    ],
+  },
 ];
 
 export function Skills() {
   const t = useTranslations("skills");
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const categoryVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-      },
-    },
-  };
-
-  const skillVariants = {
-    hidden: { opacity: 0, scale: 0 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.4,
-      },
-    },
-  };
 
   return (
-    <section
-      id="skills"
-      ref={ref}
-      className="relative py-12 md:py-20 bg-linear-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 min-h-screen flex flex-col"
-    >
-      <motion.div
-        className="container mx-auto px-6 flex-1 flex flex-col justify-center"
-        variants={containerVariants}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-      >
-        <motion.div variants={categoryVariants} className="text-center mb-8 md:mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            {t("title")}
-          </h2>
-          <div className="w-24 h-1 bg-linear-to-r from-blue-600 to-purple-600 mx-auto rounded-full" />
-        </motion.div>
+    <section id="skills" className="border-t border-border bg-surface-muted/40 py-24 md:py-32">
+      <div className="mx-auto max-w-6xl px-6">
+        <SectionHeading
+          index="04"
+          eyebrow={t("eyebrow")}
+          title={t("title")}
+          subtitle={t("subtitle")}
+        />
 
-        <div className="max-w-7xl mx-auto w-full px-2">
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-5 gap-3 md:gap-6">
-            {allSkills.map((skill, index) => (
-              <motion.div
-                key={skill.name}
-                variants={skillVariants}
-                custom={index}
-                whileHover={{
-                  scale: 1.1,
-                  rotate: [0, -5, 5, 0],
-                  transition: { duration: 0.3 },
-                }}
-                className="flex flex-col items-center justify-center p-3 md:p-6 rounded-xl bg-white dark:bg-gray-800 shadow-lg hover:shadow-2xl transition-shadow cursor-pointer"
-              >
-                <skill.icon className={`w-8 h-8 md:w-14 md:h-14 ${skill.color} mb-1 md:mb-3`} />
-                <span className="text-[10px] md:text-sm font-medium text-gray-700 dark:text-gray-300 text-center leading-tight">
-                  {skill.name}
-                </span>
-              </motion.div>
-            ))}
-          </div>
+        <div className="grid gap-4 md:grid-cols-2 md:gap-6">
+          {groups.map((group, i) => (
+            <Reveal key={group.key} delay={(i % 2) * 0.1}>
+              <div className="h-full rounded-2xl border border-border bg-surface p-6 md:p-7">
+                <h3 className="mb-5 font-mono text-xs uppercase tracking-[0.2em] text-subtle">
+                  {t(group.key)}
+                </h3>
+                <ul className="flex flex-wrap gap-2">
+                  {group.skills.map((skill) => (
+                    <li
+                      key={skill.name}
+                      className="inline-flex items-center gap-2 rounded-lg border border-border bg-background px-3 py-2 text-sm font-medium text-foreground transition-colors hover:border-foreground/30"
+                    >
+                      <skill.icon
+                        className="h-4 w-4"
+                        style={skill.color ? { color: skill.color } : undefined}
+                        aria-hidden
+                      />
+                      {skill.name}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
+          ))}
         </div>
-
-      </motion.div>
-
-      <motion.button
-        onClick={() => {
-          document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-        }}
-        className="hidden md:block absolute bottom-10 left-1/2 transform -translate-x-1/2 cursor-pointer"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        aria-label="Scroll to contact"
-      >
-        <HiArrowDown className="w-8 h-8 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200" />
-      </motion.button>
+      </div>
     </section>
   );
 }

@@ -1,80 +1,49 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+
+const languages = [
+  { code: "es", label: "ES", name: "Español" },
+  { code: "eu", label: "EU", name: "Euskara" },
+];
 
 export function LanguageToggle() {
+  const t = useTranslations("nav");
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const languages = [
-    { code: "es", label: "ES", name: "Español" },
-    { code: "eu", label: "EU", name: "Euskera" },
-  ];
 
   const handleLanguageChange = (newLocale: string) => {
+    if (newLocale === locale) return;
     const newPathname = pathname.replace(`/${locale}`, `/${newLocale}`);
-    router.push(newPathname);
-    setIsOpen(false);
+    router.replace(newPathname, { scroll: false });
   };
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        isOpen &&
-        containerRef.current &&
-        !containerRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isOpen]);
-
   return (
-    <div ref={containerRef} className="fixed top-6 right-24 z-50">
-      <motion.button
-        onClick={() => setIsOpen(!isOpen)}
-        className="cursor-pointer w-12 h-12 flex items-center justify-center rounded-full bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-shadow font-semibold text-gray-700 dark:text-gray-300"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        aria-label="Toggle language"
-      >
-        {locale.toUpperCase()}
-      </motion.button>
-
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          className="absolute top-full mt-2 right-0 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden"
-        >
-          {languages.map((lang) => (
-            <button
-              key={lang.code}
-              onClick={() => handleLanguageChange(lang.code)}
-              className={`cursor-pointer w-full px-6 py-3 text-left hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${
-                locale === lang.code
-                  ? "bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400"
-                  : "text-gray-700 dark:text-gray-300"
-              }`}
-            >
-              <div className="font-semibold">{lang.label}</div>
-              <div className="text-sm opacity-75">{lang.name}</div>
-            </button>
-          ))}
-        </motion.div>
-      )}
+    <div
+      role="group"
+      aria-label={t("language")}
+      className="inline-flex h-9 items-center rounded-full border border-border p-0.5"
+    >
+      {languages.map((lang) => {
+        const active = locale === lang.code;
+        return (
+          <button
+            key={lang.code}
+            onClick={() => handleLanguageChange(lang.code)}
+            aria-pressed={active}
+            title={lang.name}
+            className={`cursor-pointer h-full rounded-full px-2.5 text-xs font-semibold transition-colors ${
+              active
+                ? "bg-foreground text-background"
+                : "text-muted hover:text-foreground"
+            }`}
+          >
+            {lang.label}
+          </button>
+        );
+      })}
     </div>
   );
 }

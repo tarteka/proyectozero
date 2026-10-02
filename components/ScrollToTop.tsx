@@ -36,12 +36,12 @@ export function ScrollToTop() {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0 }}
           onClick={scrollToTop}
-          className="cursor-pointer fixed bottom-8 right-8 z-50 p-3 bg-linear-to-r from-blue-600 to-purple-600 text-white rounded-full shadow-lg hover:shadow-2xl transition-shadow"
+          className="cursor-pointer fixed bottom-6 right-6 z-40 p-3 rounded-full border border-border bg-surface/90 text-foreground shadow-lg shadow-black/5 backdrop-blur transition-colors hover:bg-surface-muted"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           aria-label="Scroll to top"
         >
-          <HiArrowUp className="w-6 h-6" />
+          <HiArrowUp className="h-5 w-5" />
         </motion.button>
       )}
     </AnimatePresence>

@@ -1,38 +1,161 @@
 {
+  "nav": {
+    "about": "Nitaz",
+    "experience": "Esperientzia",
+    "portfolio": "Portfolioa",
+    "skills": "Stack-a",
+    "contact": "Kontaktua",
+    "openMenu": "Menua ireki",
+    "closeMenu": "Menua itxi",
+    "toggleTheme": "Gaia aldatu",
+    "language": "Hizkuntza"
+  },
   "hero": {
-    "greeting": "Ongi etorri",
-    "name": "ProyectoZero.org",
-    "role": "Web Garapena",
-    "description": "",
-    "founder": "Sortzailea: Sergio Moreno",
-    "cta": "Ezagutu Gehiago",
-    "contact": "Harremanetan Jarri"
+    "available": "Proiektu berrietarako prest",
+    "location": "Zarautz, Gipuzkoa",
+    "greeting": "Kaixo, ni naiz",
+    "name": "Sergio Moreno",
+    "role": "Web garatzailea · Backend",
+    "description": "Aplikazio erabilgarriak eta ondo eginak eraikitzen ditut PHP, Java eta TypeScript-ekin: APIaren diseinutik hasi eta Docker bidezko hedapeneraino.",
+    "ctaPortfolio": "Proiektuak ikusi",
+    "ctaContact": "Harremanetan jarri",
+    "cv": "CVa deskargatu"
   },
   "about": {
-    "title": "Nitaz",
+    "eyebrow": "Nitaz",
+    "title": "Larrialdietatik kodera",
     "intro": "Sergio dut izena eta Zarauztarra naiz. 20 urte baino gehiago daramatzat osasun arloan Osasun-Larrialdietako Teknikaria (OLT) gisa lan egiten. Lan bat zeinak liluratu egiten nauen eta non nire erosotasun gunean bainaiz. Baina ez naiz geldirik egoten: duela denbora batzuk Web Aplikazioen Garapena ikastera erabaki nuen, eta programazioa jakin-mina izatetik benetan gozatzen dudan zerbait izatera pasa zen, batez ere backend-a.",
     "philosophy": "Etengabeko prestakuntzan dagoen garatzaile gisa, aurrera egin dut irmotasunez, jakin-minaz eta ikasteko gogo handiaz. Nire filosofia: ikasi, bidea gozatu eta inoiz ez galdu irribarra.",
+    "yearsValue": "20+",
+    "yearsLabel": "urte osasun-larrialdietan",
+    "focusValue": "Backend",
+    "focusLabel": "nire espezialitatea",
     "education": "Prestakuntza",
-    "degree": "Goi Mailako Tekniko Web Aplikazioen Garapenean (DAW)",
-    "school": "BIRTLH - Eusko Jaurlaritzaren zentro publikoa lanbide heziketako modalitate telematiko eta erdi-aurrezkoan espezializatua",
-    "status": "Titulatua"
+    "status": "Titulatua",
+    "moreInfo": "Informazio gehiago",
+    "gradeLabel": "Batez besteko nota",
+    "prev": "Aurreko titulua",
+    "next": "Hurrengo titulua",
+    "goTo": "{n}. titulura joan",
+    "degrees": {
+      "daw": {
+        "title": "Goi Mailako Teknikaria Web Aplikazioen Garapenean (DAW)",
+        "school": "Ikaskuntza Birtualen eta Digitalizatuen Lanbide Heziketako Zentro Integratua (BIRTLH)"
+      },
+      "das": {
+        "title": "Goi Mailako Teknikaria Osasun Dokumentazioan eta Administrazioan",
+        "school": "Osoki · Tolosako Inmakulada Lanbide Ikastola (Tolosa)"
+      },
+      "tes": {
+        "title": "Osasun Larrialdietako Teknikaria (OLT)",
+        "school": "Easo Politeknikoa, Donostia"
+      }
+    }
+  },
+  "experience": {
+    "eyebrow": "Esperientzia",
+    "title": "Ibilbidea",
+    "subtitle": "Larrialdietako lanetik backend garapenera, ingurune profesional batean.",
+    "items": {
+      "ambulancias": {
+        "role": "Full Stack garatzailea",
+        "company": "Ambulancias Gipuzkoa",
+        "location": "Gipuzkoa",
+        "period": "Gaur egun",
+        "meta": "",
+        "bullets": [
+          "Enpresan urte askotan OLT gisa aritu ondoren, full stack garatzaile gisa egiten dut lan bertan."
+        ]
+      },
+      "hispavista": {
+        "role": "Backend garatzailea · LTP praktikak",
+        "company": "HispaVista, S.L.",
+        "location": "Donostia",
+        "period": "2026",
+        "meta": "364 ordu",
+        "bullets": [
+          "REST APIa Symfonyrekin eta DDD + arkitektura hexagonalarekin (Domain / Application / Infrastructure, Value Objects, biltegiak).",
+          "MongoDB datu-basea API Key bidezko sarbidearekin, eta Docker Compose bidez orkestratutako ingurunea (PHP-FPM, Nginx, MongoDB).",
+          "Git eta GitLab lan-fluxuak benetako talde profesional batean."
+        ]
+      },
+      "tes": {
+        "role": "Osasun Larrialdietako Teknikaria",
+        "company": "Gipuzkoako Premiazko Osasun Garraioaren Sarea (RTSU) · Osakidetza – Euskal osasun zerbitzua",
+        "location": "",
+        "period": "20+ urte",
+        "meta": "",
+        "path": [
+          "Gurutze Gorria",
+          "Gipuzkoa Emergentziak",
+          "Ambuibérica",
+          "Ambulancias Gipuzkoa"
+        ],
+        "bullets": [
+          "Presiopean lan egitea eta erabakiak hartzea egoera kritikoetan.",
+          "Diziplina anitzeko taldeekin etengabeko koordinazioa.",
+          "Ardura, heldutasuna eta xehetasunekiko arreta, gaur egun software-garapenean aplikatzen ditudanak."
+        ]
+      }
+    },
+    "pathLabel": "Enpresak"
+  },
+  "portfolio": {
+    "eyebrow": "Portfolioa",
+    "title": "Proiektu nabarmenak",
+    "subtitle": "Lan egin dudan aplikazioen hautaketa bat, ideiatik hedapeneraino.",
+    "visit": "Webgunea ikusi",
+    "code": "Kodea",
+    "allGithub": "Proiektu gehiago GitHub-en",
+    "previewSoon": "Pantaila-argazkia laster",
+    "status": {
+      "live": "Martxan",
+      "maintenance": "Mantentze-lanetan",
+      "soon": "Laster"
+    },
+    "items": {
+      "misguardias": {
+        "tagline": "Osasun-txandak kudeatzeko Android aplikazioa",
+        "description": "RTSU Gipuzkoako langileen koadrantea automatikoki sinkronizatzen du langilearen ataritik, guardia bakoitzaren aurretik abisatzen du eta urteko estatistikak erakusten ditu. Kredentzialak gailuan zifratuta eta tarteko zerbitzaririk gabe."
+      },
+      "recetas": {
+        "tagline": "Errezeta-bilduma pertsonala, Telegram bot eta AArekin",
+        "description": "PHPko REST APIa, React-eko frontend-a eta administrazio-panela. Nahikoa da URL bat Telegramez bidaltzea: errezeta erauzten du, irudia normalizatzen du eta, falta bada, AArekin sortzen du. Etengabeko hedapena GitHub Actions eta Dockerrekin."
+      },
+      "divisas": {
+        "tagline": "Truke-tasak kontsultatu eta bihurtzeko aplikazioa",
+        "description": "Frankfurter API publikoa erabiltzen duen Angular SPA: dibisa bakoitzaren truke-tasak, bihurgailua eta bilakaera historikoa, baita bisita-liburua ere."
+      },
+      "vettrack": {
+        "tagline": "Albaitari-klinikak kudeatzeko sistema osoa",
+        "description": "DAWko ziklo amaierako proiektua, lau laguneko taldean garatua: administrazio, albaitaritza eta harrera rolak, hitzorduen agenda, maskoten historia klinikoak eta estatistika-panela."
+      }
+    }
   },
   "skills": {
-    "title": "Gaitasun Teknikoak",
+    "eyebrow": "Stack-a",
+    "title": "Gaitasun teknikoak",
+    "subtitle": "Ohiko lanean erabiltzen ditudan teknologiak.",
     "backend": "Backend",
     "frontend": "Frontend",
     "databases": "Datu-baseak",
-    "devops": "DevOps eta Tresnak"
+    "devops": "DevOps eta tresnak"
   },
   "contact": {
-    "title": "Kontaktua",
-    "subtitle": "Proiektu bat duzu buruan? Hitz egin dezagun!",
+    "eyebrow": "Kontaktua",
+    "title": "Hitz egingo dugu?",
+    "subtitle": "Proiektu bat duzu buruan edo zerbait esan nahi didazu? Idatzi eta ahalik eta lasterren erantzungo dizut.",
     "name": "Izena",
     "email": "Emaila",
     "message": "Mezua",
-    "send": "Mezua Bidali",
+    "send": "Mezua bidali",
     "sending": "Bidaltzen...",
     "success": "Mezua ondo bidali da!",
-    "error": "Errorea mezua bidaltzean. Saiatu berriro."
+    "error": "Errorea mezua bidaltzean. Saiatu berriro.",
+    "orEmail": "Edo idatzi zuzenean helbide honetara:"
+  },
+  "footer": {
+    "credits": "Sergio Morenok diseinatua eta garatua",
+    "backToTop": "Gora itzuli"
   }
 }

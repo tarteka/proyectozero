@@ -1,8 +1,103 @@
 @import "tailwindcss";
 
-@variant dark (&:where(.dark, .dark *));
+@custom-variant dark (&:where(.dark, .dark *));
 
-@theme {
+:root {
+  --background: #fafaf9;
+  --surface: #ffffff;
+  --surface-muted: #f4f4f2;
+  --foreground: #18181b;
+  --muted: #5f5f66;
+  --subtle: #8a8a93;
+  --border: #e6e6e3;
+  --accent: #e2532d;
+  --accent-foreground: #ffffff;
+  --accent-soft: #fdeee9;
+  --success: #15803d;
+  --success-soft: #e8f5ec;
+  --warning: #b45309;
+  --warning-soft: #fdf3e2;
+  --info: #1d4ed8;
+  --info-soft: #e8eefc;
+}
+
+.dark {
+  --background: #0b0b0d;
+  --surface: #141417;
+  --surface-muted: #1a1a1e;
+  --foreground: #f4f4f5;
+  --muted: #a1a1aa;
+  --subtle: #71717a;
+  --border: #26262b;
+  --accent: #f0714e;
+  --accent-foreground: #0b0b0d;
+  --accent-soft: #2a1610;
+  --success: #4ade80;
+  --success-soft: #10241a;
+  --warning: #fbbf24;
+  --warning-soft: #2a1f0b;
+  --info: #93b4ff;
+  --info-soft: #141d33;
+}
+
+@theme inline {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-soft: var(--accent-soft);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+section[id] {
+  scroll-margin-top: 4.5rem;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+/* Fondo de cuadrícula sutil para el hero */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 40%, transparent 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }

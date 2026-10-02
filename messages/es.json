@@ -1,38 +1,161 @@
 {
+  "nav": {
+    "about": "Sobre mí",
+    "experience": "Experiencia",
+    "portfolio": "Portafolio",
+    "skills": "Stack",
+    "contact": "Contacto",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "toggleTheme": "Cambiar tema",
+    "language": "Idioma"
+  },
   "hero": {
-    "greeting": "Bienvenido a",
-    "name": "ProyectoZero.org",
-    "role": "Desarrollo Web",
-    "description": "",
-    "founder": "Fundador: Sergio Moreno",
-    "cta": "Conocer Más",
-    "contact": "Contactar"
+    "available": "Abierto a nuevos proyectos",
+    "location": "Zarautz, Gipuzkoa",
+    "greeting": "Hola, soy",
+    "name": "Sergio Moreno",
+    "role": "Desarrollador web · Backend",
+    "description": "Construyo aplicaciones útiles y bien hechas con PHP, Java y TypeScript: desde el diseño de la API hasta el despliegue con Docker.",
+    "ctaPortfolio": "Ver proyectos",
+    "ctaContact": "Contactar",
+    "cv": "Descargar CV"
   },
   "about": {
-    "title": "Sobre Mí",
+    "eyebrow": "Sobre mí",
+    "title": "De las emergencias al código",
     "intro": "Me llamo Sergio y soy de Zarautz. Llevo más de 20 años vinculado al ámbito sanitario como Técnico en Emergencias Sanitarias (TES), un trabajo que me apasiona y donde estoy en mi zona de confort. Pero no me quedo quieto: hace un tiempo decidí estudiar Desarrollo de Aplicaciones Web, y la programación pasó de ser una curiosidad a algo que realmente disfruto, especialmente el backend.",
     "philosophy": "Como desarrollador en continua formación, avanzo con constancia, curiosidad y muchas ganas de seguir aprendiendo. Mi filosofía: aprender, disfrutar del camino y no perder nunca la sonrisa.",
+    "yearsValue": "20+",
+    "yearsLabel": "años en emergencias sanitarias",
+    "focusValue": "Backend",
+    "focusLabel": "mi especialidad",
     "education": "Formación",
-    "degree": "Técnico Superior en Desarrollo de Aplicaciones Web (DAW)",
-    "school": "BIRTLH - Centro público del Gobierno Vasco especializado en formación profesional telemática y semipresencial",
-    "status": "Graduado"
+    "status": "Titulado",
+    "moreInfo": "Más información",
+    "gradeLabel": "Nota media",
+    "prev": "Título anterior",
+    "next": "Título siguiente",
+    "goTo": "Ir al título {n}",
+    "degrees": {
+      "daw": {
+        "title": "Técnico Superior en Desarrollo de Aplicaciones Web (DAW)",
+        "school": "CIFP de Aprendizajes Virtuales y Digitalizados (BIRTLH)"
+      },
+      "das": {
+        "title": "Técnico Superior en Documentación y Administración Sanitarias",
+        "school": "Osoki · Tolosako Inmakulada Lanbide Ikastola (Tolosa)"
+      },
+      "tes": {
+        "title": "Técnico en Emergencias Sanitarias (TES)",
+        "school": "Easo Politeknikoa, Donostia / San Sebastián"
+      }
+    }
+  },
+  "experience": {
+    "eyebrow": "Experiencia",
+    "title": "Trayectoria",
+    "subtitle": "Del trabajo en emergencias al desarrollo backend en un entorno profesional.",
+    "items": {
+      "ambulancias": {
+        "role": "Desarrollador Full Stack",
+        "company": "Ambulancias Gipuzkoa",
+        "location": "Gipuzkoa",
+        "period": "Actualidad",
+        "meta": "",
+        "bullets": [
+          "Tras años como TES en la empresa, paso a formar parte de ella como desarrollador full stack."
+        ]
+      },
+      "hispavista": {
+        "role": "Desarrollador Backend · Prácticas FCT",
+        "company": "HispaVista, S.L.",
+        "location": "Donostia / San Sebastián",
+        "period": "2026",
+        "meta": "364 horas",
+        "bullets": [
+          "API REST con Symfony y arquitectura DDD + hexagonal (Domain / Application / Infrastructure, Value Objects, repositorios).",
+          "Base de datos MongoDB con acceso por API Key y entorno orquestado con Docker Compose (PHP-FPM, Nginx, MongoDB).",
+          "Flujos de trabajo con Git y GitLab en un equipo profesional real."
+        ]
+      },
+      "tes": {
+        "role": "Técnico en Emergencias Sanitarias",
+        "company": "Red de Transporte Sanitario Urgente (RTSU) de Gipuzkoa · Osakidetza – Servicio Vasco de Salud",
+        "location": "",
+        "period": "20+ años",
+        "meta": "",
+        "path": [
+          "Cruz Roja",
+          "Gipuzkoa Emergentziak",
+          "Ambuibérica",
+          "Ambulancias Gipuzkoa"
+        ],
+        "bullets": [
+          "Trabajo bajo presión y toma de decisiones en situaciones críticas.",
+          "Coordinación constante con equipos multidisciplinares.",
+          "Responsabilidad, madurez y atención al detalle que hoy aplico al desarrollo de software."
+        ]
+      }
+    },
+    "pathLabel": "Empresas"
+  },
+  "portfolio": {
+    "eyebrow": "Portafolio",
+    "title": "Proyectos destacados",
+    "subtitle": "Una selección de aplicaciones en las que he trabajado, de la idea al despliegue.",
+    "visit": "Visitar web",
+    "code": "Código",
+    "allGithub": "Más proyectos en GitHub",
+    "previewSoon": "Captura próximamente",
+    "status": {
+      "live": "En producción",
+      "maintenance": "En mantenimiento",
+      "soon": "Próximamente"
+    },
+    "items": {
+      "misguardias": {
+        "tagline": "App Android para gestionar turnos sanitarios",
+        "description": "Sincroniza automáticamente el cuadrante del personal de RTSU Gipuzkoa desde el portal del trabajador, avisa antes de cada guardia y muestra estadísticas anuales. Credenciales cifradas en el dispositivo y sin servidores intermedios."
+      },
+      "recetas": {
+        "tagline": "Recetario personal con bot de Telegram e IA",
+        "description": "API REST en PHP con frontend en React y panel de administración. Basta con enviar una URL por Telegram: extrae la receta, normaliza la imagen y, si falta, la genera con IA. Despliegue continuo con GitHub Actions y Docker."
+      },
+      "divisas": {
+        "tagline": "Consulta y conversión de tipos de cambio",
+        "description": "SPA en Angular que consume la API pública de Frankfurter: tipos de cambio por divisa, conversor y evolución histórica, además de un libro de visitas."
+      },
+      "vettrack": {
+        "tagline": "Gestión integral para clínicas veterinarias",
+        "description": "Proyecto de fin de ciclo de DAW desarrollado en un equipo de cuatro personas: roles de administración, veterinaria y recepción, agenda de citas, historiales clínicos de mascotas y panel de estadísticas."
+      }
+    }
   },
   "skills": {
-    "title": "Habilidades Técnicas",
+    "eyebrow": "Stack",
+    "title": "Habilidades técnicas",
+    "subtitle": "Las tecnologías con las que trabajo habitualmente.",
     "backend": "Backend",
     "frontend": "Frontend",
-    "databases": "Bases de Datos",
-    "devops": "DevOps & Herramientas"
+    "databases": "Bases de datos",
+    "devops": "DevOps y herramientas"
   },
   "contact": {
-    "title": "Contacto",
-    "subtitle": "¿Tienes un proyecto en mente? ¡Hablemos!",
+    "eyebrow": "Contacto",
+    "title": "¿Hablamos?",
+    "subtitle": "¿Tienes un proyecto en mente o quieres comentarme algo? Escríbeme y te responderé lo antes posible.",
     "name": "Nombre",
     "email": "Email",
     "message": "Mensaje",
-    "send": "Enviar Mensaje",
+    "send": "Enviar mensaje",
     "sending": "Enviando...",
     "success": "¡Mensaje enviado con éxito!",
-    "error": "Error al enviar el mensaje. Inténtalo de nuevo."
+    "error": "Error al enviar el mensaje. Inténtalo de nuevo.",
+    "orEmail": "O escríbeme directamente a"
+  },
+  "footer": {
+    "credits": "Diseñado y desarrollado por Sergio Moreno",
+    "backToTop": "Volver arriba"
   }
 }

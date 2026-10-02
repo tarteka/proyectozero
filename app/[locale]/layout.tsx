@@ -6,8 +6,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import "../globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
-import { ThemeToggle } from "@/components/ThemeToggle";
-import { LanguageToggle } from "@/components/LanguageToggle";
+import { MotionProvider } from "@/components/providers/MotionProvider";
+import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
 import { ScrollToTop } from "@/components/ScrollToTop";
 
 const geistSans = Geist({
@@ -21,9 +22,18 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ProyectoZero.org - Desarrollo Web",
+  metadataBase: new URL("https://proyectozero.org"),
+  title: "Sergio Moreno · Desarrollador web | ProyectoZero",
   description:
-    "Sergio Moreno - Desarrollador Web",
+    "Portafolio de Sergio Moreno, desarrollador web especializado en backend (PHP, Java, TypeScript, Docker) en Zarautz, Gipuzkoa.",
+  openGraph: {
+    title: "Sergio Moreno · Desarrollador web",
+    description:
+      "Portafolio de Sergio Moreno, desarrollador web especializado en backend.",
+    url: "https://proyectozero.org",
+    siteName: "ProyectoZero",
+    type: "website",
+  },
 };
 
 const locales = ["es", "eu"];
@@ -55,7 +65,7 @@ export default async function LocaleLayout({
         strategy="afterInteractive"
       />
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} bg-background font-sans text-foreground antialiased`}
         suppressHydrationWarning
       >
         <ThemeProvider
@@ -65,10 +75,12 @@ export default async function LocaleLayout({
           storageKey="proyectozero-theme"
         >
           <NextIntlClientProvider messages={messages}>
-            <ThemeToggle />
-            <LanguageToggle />
-            <ScrollToTop />
-            {children}
+            <MotionProvider>
+              <Navbar />
+              {children}
+              <Footer />
+              <ScrollToTop />
+            </MotionProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>
