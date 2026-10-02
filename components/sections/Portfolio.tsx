@@ -33,9 +33,9 @@ function ProjectPreview({ project }: { project: Project }) {
       {/* Barra de navegador */}
       <div className="flex h-9 items-center gap-3 border-b border-border px-4">
         <div className="flex gap-1.5" aria-hidden>
-          <span className="h-2.5 w-2.5 rounded-full bg-border" />
-          <span className="h-2.5 w-2.5 rounded-full bg-border" />
-          <span className="h-2.5 w-2.5 rounded-full bg-border" />
+          <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
+          <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
+          <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
         </div>
         <span className="truncate font-mono text-[11px] text-subtle">{domain}</span>
       </div>
