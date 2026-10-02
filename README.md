@@ -11,7 +11,7 @@ ProyectoZero es mi portfolio personal donde combino mi pasión por el desarrollo
 - **Multiidioma:** Soporte completo para español y euskera
 - **Modo Oscuro:** Tema claro/oscuro con transiciones suaves
 - **Animaciones Fluidas:** Experiencia interactiva con Framer Motion
-- **Contacto Integrado:** Formulario funcional conectado con Mailgun
+- **Contacto Integrado:** Formulario funcional conectado con Resend
 - **Responsive:** Diseño adaptable a todos los dispositivos
 - **Performance:** Optimizado con Next.js 15 y React 19
 
@@ -23,7 +23,7 @@ ProyectoZero es mi portfolio personal donde combino mi pasión por el desarrollo
 - **Animaciones:** Framer Motion
 - **Internacionalización:** next-intl
 - **Temas:** next-themes
-- **Email:** Mailgun.js
+- **Email:** Resend
 - **Lenguaje:** TypeScript 5
 
 ## Desarrollo Local
@@ -49,8 +49,8 @@ Abre [http://localhost:3000](http://localhost:3000) y verás la aplicación corr
 Crea un archivo `.env.local` con las siguientes variables:
 
 ```env
-MAILGUN_API_KEY=tu_api_key
-MAILGUN_DOMAIN=tu_dominio
+RESEND_API_KEY=tu_api_key
+RESEND_FROM_EMAIL=contacto@proyectozero.org
 CONTACT_EMAIL=your_contact_email_here
 ```
 

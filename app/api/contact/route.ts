@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import formData from "form-data";
-import Mailgun from "mailgun.js";
+import { Resend } from "resend";
 
 export async function POST(request: NextRequest) {
   try {
@@ -24,18 +23,12 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Initialize Mailgun (EU region)
-    const mailgun = new Mailgun(formData);
-    const mg = mailgun.client({
-      username: "api",
-      key: process.env.MAILGUN_API_KEY || "",
-      url: "https://api.eu.mailgun.net", // EU region
-    });
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
-    // Send email
-    const emailData = {
-      from: `ProyectoZero <proyectozero@${process.env.MAILGUN_DOMAIN}>`,
+    const { error } = await resend.emails.send({
+      from: `ProyectoZero <${process.env.RESEND_FROM_EMAIL}>`,
       to: process.env.CONTACT_EMAIL || "info@tarteka.net",
+      replyTo: email,
       subject: `Contacto desde ProyectoZero.org - ${name}`,
       text: `Nombre: ${name}\nEmail: ${email}\n\nMensaje:\n${message}`,
       html: `
@@ -45,9 +38,11 @@ export async function POST(request: NextRequest) {
         <p><strong>Mensaje:</strong></p>
         <p>${message.replace(/\n/g, "<br>")}</p>
       `,
-    };
+    });
 
-    await mg.messages.create(process.env.MAILGUN_DOMAIN || "", emailData);
+    if (error) {
+      throw error;
+    }
 
     return NextResponse.json(
       { message: "Message sent successfully" },
