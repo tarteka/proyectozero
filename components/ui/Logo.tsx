@@ -1,7 +1,7 @@
 export function Logo({ className = "" }: { className?: string }) {
   return (
     <span className={`inline-flex items-center gap-2 ${className}`}>
-      <svg viewBox="0 0 100 100" className="h-7 w-7" aria-hidden>
+      <svg viewBox="0 0 100 100" className="h-8 w-8" aria-hidden>
         <rect width="100" height="100" rx="22" className="fill-foreground" />
         <circle
           cx="50"
@@ -21,7 +21,7 @@ export function Logo({ className = "" }: { className?: string }) {
           className="stroke-accent"
         />
       </svg>
-      <span className="text-[15px] font-semibold tracking-tight text-foreground">
+      <span className="text-[20px] font-semibold tracking-tight text-foreground">
         proyecto<span className="text-accent">zero</span>
       </span>
     </span>
