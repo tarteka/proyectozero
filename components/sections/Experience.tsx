@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import type { IconType } from "react-icons";
 import { FaAmbulance } from "react-icons/fa";
-import { HiChevronRight, HiCodeBracket, HiCommandLine } from "react-icons/hi2";
+import { HiArrowUpRight, HiChevronRight, HiCodeBracket, HiCommandLine } from "react-icons/hi2";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
@@ -12,14 +12,33 @@ interface Job {
   icon: IconType;
   current?: boolean;
   stack?: string[];
+  url?: string;
 }
 
 // Del más reciente al más antiguo. Textos en messages/*.json → experience.items.<id>
 const jobs: Job[] = [
-  { id: "ambulancias", icon: HiCommandLine, current: true },
+  {
+    id: "ambulancias",
+    icon: HiCommandLine,
+    current: true,
+    url: "https://ambulanciasgipuzkoa.eus/",
+    stack: [
+      "Python",
+      "FastAPI",
+      "PostgreSQL",
+      "Angular",
+      "TypeScript",
+      "Kotlin",
+      "Android nativo",
+      "DDD",
+      "Hexagonal",
+      "HL7",
+    ],
+  },
   {
     id: "hispavista",
     icon: HiCodeBracket,
+    url: "https://hispavistalabs.com/",
     stack: ["PHP", "Symfony", "DDD", "Hexagonal", "MongoDB", "Docker Compose", "Nginx", "GitLab"],
   },
   { id: "tes", icon: FaAmbulance },
@@ -44,11 +63,10 @@ export function Experience() {
             const path = t.has(`items.${job.id}.path`)
               ? (t.raw(`items.${job.id}.path`) as string[])
               : null;
-            const details = [
-              t(`items.${job.id}.company`),
-              t(`items.${job.id}.location`),
-              t(`items.${job.id}.meta`),
-            ].filter(Boolean);
+            const company = t(`items.${job.id}.company`);
+            const rest = [t(`items.${job.id}.location`), t(`items.${job.id}.meta`)].filter(
+              Boolean,
+            );
 
             return (
               <li key={job.id}>
@@ -72,7 +90,22 @@ export function Experience() {
                     <h3 className="text-lg font-semibold tracking-tight text-foreground md:text-xl">
                       {t(`items.${job.id}.role`)}
                     </h3>
-                    <p className="mt-1 text-sm text-muted">{details.join(" · ")}</p>
+                    <p className="mt-1 text-sm text-muted">
+                      {job.url ? (
+                        <a
+                          href={job.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group inline-flex items-center gap-1 font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-accent"
+                        >
+                          {company}
+                          <HiArrowUpRight className="h-3 w-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                        </a>
+                      ) : (
+                        company
+                      )}
+                      {rest.length > 0 && ` · ${rest.join(" · ")}`}
+                    </p>
 
                     {path && (
                       <div className="mt-4">

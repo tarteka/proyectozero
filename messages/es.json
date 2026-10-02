@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "title": "Sergio Moreno · Desarrollador web Full Stack | ProyectoZero",
+    "description": "Portafolio de Sergio Moreno, desarrollador full stack especializado en backend (PHP, Symfony, Java, Python) en Zarautz, Gipuzkoa. Proyectos, experiencia y contacto."
+  },
   "nav": {
     "about": "Sobre mí",
     "experience": "Experiencia",
@@ -64,7 +68,9 @@
         "period": "Actualidad",
         "meta": "",
         "bullets": [
-          "Tras años como TES en la empresa, paso a formar parte de ella como desarrollador full stack."
+          "Diseño y desarrollo de software a medida para digitalizar la operativa diaria de la empresa.",
+          "Aplicaciones para la gestión de empleados, la flota y el almacén, entre otras áreas del día a día.",
+          "Integración HL7 con los servicios de Osakidetza para la gestión de pacientes."
         ]
       },
       "hispavista": {

@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "title": "Sergio Moreno · Full Stack web garatzailea | ProyectoZero",
+    "description": "Sergio Morenoren portfolioa, backend arloan espezializatutako full stack garatzailea (PHP, Symfony, Java, Python) Zarautzen, Gipuzkoan. Proiektuak, esperientzia eta kontaktua."
+  },
   "nav": {
     "about": "Nitaz",
     "experience": "Esperientzia",
@@ -64,7 +68,9 @@
         "period": "Gaur egun",
         "meta": "",
         "bullets": [
-          "Enpresan urte askotan OLT gisa aritu ondoren, full stack garatzaile gisa egiten dut lan bertan."
+          "Neurrira egindako softwarea diseinatu eta garatzen dut enpresaren eguneroko jarduera digitalizatzeko.",
+          "Langileen kudeaketarako, flotarako eta biltegirako aplikazioak, eguneroko beste zenbait arlotan ere.",
+          "HL7 bidezko integrazioa Osakidetzaren zerbitzuekin, pazienteak kudeatzeko."
         ]
       },
       "hispavista": {
