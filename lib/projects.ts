@@ -53,8 +53,10 @@ export const projects: Project[] = [
     id: "vettrack",
     name: "VetTrack",
     type: "Web · TFC DAW",
-    status: "soon",
+    status: "live",
+    url: "https://vettrack.proyectozero.org",
     repo: "https://github.com/tarteka/vettrack",
+    image: "/images/projects/vettrack.png",
     stack: ["Symfony", "Angular", "TypeScript", "MariaDB", "Docker"],
   },
 ];
