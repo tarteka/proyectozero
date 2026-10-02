@@ -15,11 +15,11 @@
     "language": "Idioma"
   },
   "hero": {
-    "available": "Abierto a nuevos proyectos",
+    "available": "Disponible para nuevos proyectos",
     "location": "Zarautz, Gipuzkoa",
     "greeting": "Hola, soy",
     "name": "Sergio Moreno",
-    "role": "Desarrollador web · Backend",
+    "role": "Desarrollador web · Full Stack",
     "description": "Construyo aplicaciones útiles y bien hechas con PHP, Java y TypeScript: desde el diseño de la API hasta el despliegue con Docker.",
     "ctaPortfolio": "Ver proyectos",
     "ctaContact": "Contactar",
