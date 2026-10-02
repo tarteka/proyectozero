@@ -3,7 +3,13 @@
 import { useTranslations } from "next-intl";
 import type { IconType } from "react-icons";
 import { FaAmbulance } from "react-icons/fa";
-import { HiArrowUpRight, HiChevronRight, HiCodeBracket, HiCommandLine } from "react-icons/hi2";
+import {
+  HiArrowUpRight,
+  HiChevronDown,
+  HiChevronRight,
+  HiCodeBracket,
+  HiCommandLine,
+} from "react-icons/hi2";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
@@ -57,7 +63,7 @@ export function Experience() {
           subtitle={t("subtitle")}
         />
 
-        <ol className="relative space-y-6 md:space-y-8">
+        <ol className="relative">
           {jobs.map((job, i) => {
             const bullets = t.raw(`items.${job.id}.bullets`) as string[];
             const path = t.has(`items.${job.id}.path`)
@@ -67,26 +73,35 @@ export function Experience() {
             const rest = [t(`items.${job.id}.location`), t(`items.${job.id}.meta`)].filter(
               Boolean,
             );
+            const isLast = i === jobs.length - 1;
 
             return (
-              <li key={job.id}>
-                <Reveal
-                  delay={i * 0.1}
-                  className="grid gap-4 md:grid-cols-[180px_1fr] md:gap-10"
-                >
-                  <div className="flex items-center gap-3 md:flex-col md:items-start md:pt-7">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-surface text-accent">
-                      <job.icon className="h-5 w-5" />
-                    </span>
-                    <span className="inline-flex items-center gap-2 font-mono text-sm text-muted">
-                      {job.current && (
-                        <span className="h-2 w-2 rounded-full bg-success" aria-hidden />
-                      )}
-                      {t(`items.${job.id}.period`)}
+              <li key={job.id} className={`relative ${isLast ? "" : "pb-10 md:pb-12"}`}>
+                {!isLast && (
+                  <div
+                    aria-hidden
+                    className="absolute left-5 top-10 bottom-0 w-px bg-border"
+                  >
+                    <span className="absolute bottom-1.5 left-1/2 flex h-5 w-5 -translate-x-1/2 items-center justify-center rounded-full bg-surface-muted">
+                      <HiChevronDown className="h-3 w-3 text-subtle" />
                     </span>
                   </div>
+                )}
 
-                  <article className="rounded-2xl border border-border bg-surface p-6 md:p-7">
+                <Reveal delay={i * 0.1} className="flex gap-4 md:gap-6">
+                  <span className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-border bg-surface text-accent">
+                    <job.icon className="h-5 w-5" />
+                  </span>
+
+                  <article className="min-w-0 flex-1 rounded-2xl border border-border bg-surface p-6 md:p-7">
+                    <div className="mb-1 flex flex-wrap items-center gap-2">
+                      <span className="inline-flex items-center gap-1.5 font-mono text-xs text-subtle">
+                        {job.current && (
+                          <span className="h-1.5 w-1.5 rounded-full bg-success" aria-hidden />
+                        )}
+                        {t(`items.${job.id}.period`)}
+                      </span>
+                    </div>
                     <h3 className="text-lg font-semibold tracking-tight text-foreground md:text-xl">
                       {t(`items.${job.id}.role`)}
                     </h3>
