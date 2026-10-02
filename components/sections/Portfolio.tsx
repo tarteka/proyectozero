@@ -157,7 +157,7 @@ export function Portfolio() {
           subtitle={t("subtitle")}
         />
 
-        <div className="grid gap-6 md:grid-cols-2 md:gap-8">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
           {projects.map((project, i) => (
             <Reveal key={project.id} delay={(i % 2) * 0.1} className="h-full">
               <ProjectCard project={project} />

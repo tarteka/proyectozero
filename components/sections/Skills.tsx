@@ -84,7 +84,7 @@ export function Skills() {
           subtitle={t("subtitle")}
         />
 
-        <div className="grid gap-4 md:grid-cols-2 md:gap-6">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
           {groups.map((group, i) => (
             <Reveal key={group.key} delay={(i % 2) * 0.1}>
               <div className="h-full rounded-2xl border border-border bg-surface p-6 md:p-7">
