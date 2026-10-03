@@ -100,7 +100,17 @@ export function Navbar() {
                 <li key={id}>
                   <a
                     href={`#${id}`}
-                    onClick={() => setOpen(false)}
+                    onClick={(e) => {
+                      // Se desplaza manualmente tras cerrar el menú: si el
+                      // salto nativo ocurre mientras el desplegable todavía
+                      // se está colapsando, el cambio de layout lo cancela
+                      // (reproducible en Android).
+                      e.preventDefault();
+                      setOpen(false);
+                      window.setTimeout(() => {
+                        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+                      }, 300);
+                    }}
                     className="block py-3 text-lg font-medium text-foreground"
                   >
                     {t(id)}
