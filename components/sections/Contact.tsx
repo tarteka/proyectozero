@@ -9,7 +9,7 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
-const EMAIL = "sergio@proyectozero.org";
+const EMAIL = "sergimoreno@outlook.com";
 
 const buttonColors = {
   idle: "bg-foreground text-background hover:opacity-90",
