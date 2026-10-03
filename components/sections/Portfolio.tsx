@@ -50,7 +50,7 @@ function ProjectPreview({ project }: { project: Project }) {
             className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
           />
         ) : (
-          <div className="flex h-full flex-col items-center justify-center gap-4 bg-[radial-gradient(var(--border)_1px,transparent_1px)] bg-size-[16px_16px]">
+          <div className="bg-dots flex h-full flex-col items-center justify-center gap-4">
             {Icon && (
               <span className="flex h-16 w-16 items-center justify-center rounded-2xl border border-border bg-surface text-accent shadow-sm transition-transform duration-500 group-hover:scale-110">
                 <Icon className="h-8 w-8" />

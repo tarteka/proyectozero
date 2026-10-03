@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import { useTranslations } from "next-intl";
-import type { IconType } from "react-icons";
-import { FaAmbulance } from "react-icons/fa";
+import { useTranslations } from 'next-intl';
+import type { IconType } from 'react-icons';
+import { FaAmbulance } from 'react-icons/fa';
 import {
   HiArrowUpRight,
   HiChevronDown,
   HiChevronRight,
   HiCodeBracket,
   HiCommandLine,
-} from "react-icons/hi2";
-import { Reveal } from "@/components/ui/Reveal";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+} from 'react-icons/hi2';
+import { Reveal } from '@/components/ui/Reveal';
+import { SectionHeading } from '@/components/ui/SectionHeading';
 
 interface Job {
-  id: "ambulancias" | "hispavista" | "tes";
+  id: 'ambulancias' | 'hispavista' | 'tes';
   icon: IconType;
   current?: boolean;
   stack?: string[];
@@ -24,43 +24,46 @@ interface Job {
 // Del más reciente al más antiguo. Textos en messages/*.json → experience.items.<id>
 const jobs: Job[] = [
   {
-    id: "ambulancias",
+    id: 'ambulancias',
     icon: HiCommandLine,
     current: true,
-    url: "https://ambulanciasgipuzkoa.eus/",
+    url: 'https://ambulanciasgipuzkoa.eus/',
     stack: [
-      "Python",
-      "FastAPI",
-      "PostgreSQL",
-      "Angular",
-      "TypeScript",
-      "Kotlin",
-      "Android nativo",
-      "DDD",
-      "Hexagonal",
-      "HL7",
+      'Python',
+      'FastAPI',
+      'PostgreSQL',
+      'Angular',
+      'TypeScript',
+      'Kotlin',
+      'Android nativo',
+      'DDD',
+      'Hexagonal',
+      'HL7',
     ],
   },
   {
-    id: "hispavista",
+    id: 'hispavista',
     icon: HiCodeBracket,
-    url: "https://hispavistalabs.com/",
-    stack: ["PHP", "Symfony", "DDD", "Hexagonal", "MongoDB", "Docker Compose", "Nginx", "GitLab"],
+    url: 'https://hispavistalabs.com/',
+    stack: ['PHP', 'Symfony', 'DDD', 'Hexagonal', 'MongoDB', 'Docker Compose', 'Nginx', 'GitLab'],
   },
-  { id: "tes", icon: FaAmbulance },
+  { id: 'tes', icon: FaAmbulance },
 ];
 
 export function Experience() {
-  const t = useTranslations("experience");
+  const t = useTranslations('experience');
 
   return (
-    <section id="experience" className="border-t border-border bg-surface-muted/40 py-24 md:py-32">
+    <section
+      id="experience"
+      className="border-t border-border bg-surface-muted/40 bg-dots py-24 md:py-32"
+    >
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeading
           index="02"
-          eyebrow={t("eyebrow")}
-          title={t("title")}
-          subtitle={t("subtitle")}
+          eyebrow={t('eyebrow')}
+          title={t('title')}
+          subtitle={t('subtitle')}
         />
 
         <ol className="relative">
@@ -70,18 +73,13 @@ export function Experience() {
               ? (t.raw(`items.${job.id}.path`) as string[])
               : null;
             const company = t(`items.${job.id}.company`);
-            const rest = [t(`items.${job.id}.location`), t(`items.${job.id}.meta`)].filter(
-              Boolean,
-            );
+            const rest = [t(`items.${job.id}.location`), t(`items.${job.id}.meta`)].filter(Boolean);
             const isLast = i === jobs.length - 1;
 
             return (
-              <li key={job.id} className={`relative ${isLast ? "" : "pb-10 md:pb-12"}`}>
+              <li key={job.id} className={`relative ${isLast ? '' : 'pb-10 md:pb-12'}`}>
                 {!isLast && (
-                  <div
-                    aria-hidden
-                    className="absolute left-5 top-10 bottom-0 w-px bg-border"
-                  >
+                  <div aria-hidden className="absolute left-5 top-10 bottom-0 w-px bg-border">
                     <span className="absolute bottom-1.5 left-1/2 flex h-5 w-5 -translate-x-1/2 items-center justify-center rounded-full bg-surface-muted">
                       <HiChevronDown className="h-3 w-3 text-subtle" />
                     </span>
@@ -119,13 +117,13 @@ export function Experience() {
                       ) : (
                         company
                       )}
-                      {rest.length > 0 && ` · ${rest.join(" · ")}`}
+                      {rest.length > 0 && ` · ${rest.join(' · ')}`}
                     </p>
 
                     {path && (
                       <div className="mt-4">
                         <p className="mb-2 font-mono text-[11px] uppercase tracking-[0.15em] text-subtle">
-                          {t("pathLabel")}
+                          {t('pathLabel')}
                         </p>
                         <ol className="flex flex-wrap items-center gap-1.5">
                           {path.map((company, j) => (
@@ -133,8 +131,8 @@ export function Experience() {
                               <span
                                 className={`rounded-md border px-2 py-1 text-xs font-medium ${
                                   j === path.length - 1
-                                    ? "border-accent/40 bg-accent-soft text-accent"
-                                    : "border-border bg-surface-muted text-muted"
+                                    ? 'border-accent/40 bg-accent-soft text-accent'
+                                    : 'border-border bg-surface-muted text-muted'
                                 }`}
                               >
                                 {company}

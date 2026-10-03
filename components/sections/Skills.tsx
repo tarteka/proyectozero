@@ -75,7 +75,10 @@ export function Skills() {
   const t = useTranslations("skills");
 
   return (
-    <section id="skills" className="border-t border-border bg-surface-muted/40 py-24 md:py-32">
+    <section
+      id="skills"
+      className="border-t border-border bg-surface-muted/40 bg-dots py-24 md:py-32"
+    >
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeading
           index="04"
