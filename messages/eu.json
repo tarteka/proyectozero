@@ -156,7 +156,8 @@
     "message": "Mezua",
     "send": "Mezua bidali",
     "sending": "Bidaltzen...",
-    "success": "Mezua ondo bidali da!",
+    "sent": "Bidalita",
+    "failed": "Ez da bidali",
     "error": "Errorea mezua bidaltzean. Saiatu berriro.",
     "orEmail": "Edo idatzi zuzenean helbide honetara:"
   },

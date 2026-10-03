@@ -1,6 +1,8 @@
 'use client';
 
+import { motion, useReducedMotion, useScroll } from 'framer-motion';
 import { useTranslations } from 'next-intl';
+import { useRef } from 'react';
 import type { IconType } from 'react-icons';
 import { FaAmbulance } from 'react-icons/fa';
 import {
@@ -50,6 +52,24 @@ const jobs: Job[] = [
   { id: 'tes', icon: FaAmbulance },
 ];
 
+function TimelineLine() {
+  const ref = useRef<HTMLDivElement>(null);
+  const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start 75%', 'end 75%'] });
+
+  return (
+    <div ref={ref} aria-hidden className="absolute left-5 top-10 bottom-0 w-px bg-border">
+      <motion.div
+        style={{ scaleY: reduceMotion ? 1 : scrollYProgress }}
+        className="absolute inset-0 origin-top bg-accent"
+      />
+      <span className="absolute bottom-1.5 left-1/2 flex h-5 w-5 -translate-x-1/2 items-center justify-center rounded-full bg-surface-muted">
+        <HiChevronDown className="h-3 w-3 text-subtle" />
+      </span>
+    </div>
+  );
+}
+
 export function Experience() {
   const t = useTranslations('experience');
 
@@ -78,13 +98,7 @@ export function Experience() {
 
             return (
               <li key={job.id} className={`relative ${isLast ? '' : 'pb-10 md:pb-12'}`}>
-                {!isLast && (
-                  <div aria-hidden className="absolute left-5 top-10 bottom-0 w-px bg-border">
-                    <span className="absolute bottom-1.5 left-1/2 flex h-5 w-5 -translate-x-1/2 items-center justify-center rounded-full bg-surface-muted">
-                      <HiChevronDown className="h-3 w-3 text-subtle" />
-                    </span>
-                  </div>
-                )}
+                {!isLast && <TimelineLine />}
 
                 <Reveal delay={i * 0.1} className="flex gap-4 md:gap-6">
                   <span className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-border bg-surface text-accent">

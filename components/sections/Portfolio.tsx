@@ -70,8 +70,17 @@ function ProjectCard({ project }: { project: Project }) {
   const t = useTranslations("portfolio");
   const showVisit = project.url && project.status === "live";
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    e.currentTarget.style.setProperty("--spot-x", `${e.clientX - rect.left}px`);
+    e.currentTarget.style.setProperty("--spot-y", `${e.clientY - rect.top}px`);
+  };
+
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-all duration-300 hover:-translate-y-1 hover:border-foreground/20 hover:shadow-xl hover:shadow-black/5 dark:hover:shadow-black/40">
+    <article
+      onMouseMove={handleMouseMove}
+      className="spotlight group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-all duration-300 hover:-translate-y-1 hover:border-foreground/20 hover:shadow-xl hover:shadow-black/5 dark:hover:shadow-black/40"
+    >
       <ProjectPreview project={project} />
 
       <div className="flex flex-1 flex-col p-6 md:p-7">

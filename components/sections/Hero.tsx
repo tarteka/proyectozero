@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion, useSpring } from "framer-motion";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { HiArrowRight, HiLocationMarker } from "react-icons/hi";
@@ -18,14 +18,33 @@ const fadeUp = {
 
 export function Hero() {
   const t = useTranslations("hero");
+  const reduceMotion = useReducedMotion();
+  const glowX = useSpring(0, { stiffness: 50, damping: 20 });
+  const glowY = useSpring(0, { stiffness: 50, damping: 20 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    if (reduceMotion) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    // El centro del glow está a 80px del borde superior (-top-40 + h-120 / 2)
+    glowX.set((e.clientX - rect.left - rect.width / 2) * 0.25);
+    glowY.set((e.clientY - rect.top - 80) * 0.25);
+  };
+
+  const handleMouseLeave = () => {
+    glowX.set(0);
+    glowY.set(0);
+  };
 
   return (
     <section
       id="top"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
       className="relative overflow-hidden pt-32 pb-20 md:pt-44 md:pb-32"
     >
       <div className="bg-grid absolute inset-0 -z-10" aria-hidden />
-      <div
+      <motion.div
+        style={{ x: glowX, y: glowY }}
         className="absolute -top-40 left-1/2 -z-10 h-120 w-120 -translate-x-1/2 rounded-full bg-accent/10 blur-3xl"
         aria-hidden
       />
@@ -138,13 +157,13 @@ export function Hero() {
 
         <motion.div
           variants={fadeUp}
-          className="relative mx-auto w-56 sm:w-64 md:w-72"
+          className="group relative mx-auto w-56 sm:w-64 md:w-72"
         >
           <div
-            className="absolute inset-0 translate-x-3 translate-y-3 rounded-3xl border border-accent/40 bg-accent-soft"
+            className="absolute inset-0 translate-x-3 translate-y-3 rounded-3xl border border-accent/40 bg-accent-soft transition-transform duration-500 ease-out motion-safe:group-hover:translate-x-5 motion-safe:group-hover:translate-y-5"
             aria-hidden
           />
-          <div className="relative aspect-4/5 overflow-hidden rounded-3xl border border-border bg-surface-muted">
+          <div className="relative aspect-4/5 overflow-hidden rounded-3xl border border-border bg-surface-muted transition-transform duration-500 ease-out motion-safe:group-hover:-translate-x-1 motion-safe:group-hover:-translate-y-1">
             <Image
               src="/images/sergio-moreno.jpg"
               alt="Sergio Moreno"

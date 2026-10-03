@@ -156,7 +156,8 @@
     "message": "Mensaje",
     "send": "Enviar mensaje",
     "sending": "Enviando...",
-    "success": "¡Mensaje enviado con éxito!",
+    "sent": "Enviado",
+    "failed": "No se ha enviado",
     "error": "Error al enviar el mensaje. Inténtalo de nuevo.",
     "orEmail": "O escríbeme directamente a"
   },

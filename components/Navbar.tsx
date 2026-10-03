@@ -58,12 +58,19 @@ export function Navbar() {
             <li key={id}>
               <a
                 href={`#${id}`}
-                className={`rounded-full px-3.5 py-2 text-sm transition-colors ${
+                className={`relative isolate block rounded-full px-3.5 py-2 text-sm transition-colors ${
                   active === id
                     ? "text-foreground"
                     : "text-muted hover:text-foreground"
                 }`}
               >
+                {active === id && (
+                  <motion.span
+                    layoutId="nav-active"
+                    className="absolute inset-0 -z-10 rounded-full border border-border bg-surface-muted"
+                    transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                  />
+                )}
                 {t(id)}
               </a>
             </li>

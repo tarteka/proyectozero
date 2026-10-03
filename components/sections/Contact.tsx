@@ -4,12 +4,26 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { HiMail } from "react-icons/hi";
-import { HiArrowRight } from "react-icons/hi2";
+import { HiArrowRight, HiCheck, HiXMark } from "react-icons/hi2";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const EMAIL = "sergimoreno@outlook.com";
+
+const buttonColors = {
+  idle: "bg-foreground text-background hover:opacity-90",
+  loading: "bg-foreground text-background",
+  success: "bg-success text-background",
+  error: "bg-accent text-accent-foreground",
+} as const;
+
+const buttonLabels = {
+  idle: "send",
+  loading: "sending",
+  success: "sent",
+  error: "failed",
+} as const;
 
 const inputClass =
   "w-full rounded-lg border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-subtle transition-colors focus:border-accent focus:outline-none focus:ring-4 focus:ring-accent/15";
@@ -177,28 +191,43 @@ export function Contact() {
             <button
               type="submit"
               disabled={status === "loading"}
-              className="group inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-foreground px-6 py-3.5 text-sm font-semibold text-background transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+              aria-live="polite"
+              className={`group inline-flex h-12 w-full cursor-pointer items-center justify-center overflow-hidden rounded-full px-6 text-sm font-semibold transition-[opacity,background-color,color] duration-300 disabled:cursor-not-allowed disabled:opacity-70 ${buttonColors[status]}`}
             >
-              {status === "loading" ? t("sending") : t("send")}
-              {status !== "loading" && (
-                <HiArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              )}
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.span
+                  key={status}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -12 }}
+                  transition={{ duration: 0.2 }}
+                  className="inline-flex items-center gap-2"
+                >
+                  {status === "loading" && (
+                    <span
+                      className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent"
+                      aria-hidden
+                    />
+                  )}
+                  {status === "success" && <HiCheck className="h-4 w-4" />}
+                  {status === "error" && <HiXMark className="h-4 w-4" />}
+                  {t(buttonLabels[status])}
+                  {status === "idle" && (
+                    <HiArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                  )}
+                </motion.span>
+              </AnimatePresence>
             </button>
 
             <AnimatePresence>
-              {(status === "success" || status === "error") && (
+              {status === "error" && (
                 <motion.div
                   initial={{ opacity: 0, y: -8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
-                  role="status"
-                  className={`rounded-lg p-3 text-center text-sm font-medium ${
-                    status === "success"
-                      ? "bg-success-soft text-success"
-                      : "bg-accent-soft text-accent"
-                  }`}
+                  className="rounded-lg bg-accent-soft p-3 text-center text-sm font-medium text-accent"
                 >
-                  {status === "success" ? t("success") : t("error")}
+                  {t("error")}
                 </motion.div>
               )}
             </AnimatePresence>
