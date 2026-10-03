@@ -71,10 +71,10 @@ export function Navbar() {
         </ul>
 
         <div className="flex items-center gap-2">
-          <div className="hidden sm:block">
+          <div className="hidden items-center gap-2 sm:flex">
             <LanguageToggle />
+            <ThemeToggle />
           </div>
-          <ThemeToggle />
           <button
             onClick={() => setOpen((v) => !v)}
             className="cursor-pointer inline-flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground md:hidden"
@@ -107,8 +107,9 @@ export function Navbar() {
                   </a>
                 </li>
               ))}
-              <li className="pt-4 sm:hidden">
+              <li className="flex items-center gap-2 pt-4 sm:hidden">
                 <LanguageToggle />
+                <ThemeToggle />
               </li>
             </ul>
           </motion.div>
