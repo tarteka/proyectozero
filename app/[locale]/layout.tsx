@@ -83,23 +83,59 @@ export default async function LocaleLayout({
   }
 
   const messages = await getMessages();
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  const site = "https://proyectozero.org";
 
-  const personJsonLd = {
+  const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Person",
-    name: "Sergio Moreno",
-    url: "https://proyectozero.org",
-    image: "https://proyectozero.org/images/sergio-moreno.jpg",
-    jobTitle: locale === "eu" ? "Full Stack web garatzailea" : "Desarrollador web Full Stack",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Zarautz",
-      addressRegion: "Gipuzkoa",
-      addressCountry: "ES",
-    },
-    sameAs: [
-      "https://github.com/tarteka",
-      "https://www.linkedin.com/in/sergio-moreno-tes",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": `${site}/#website`,
+        url: site,
+        name: "ProyectoZero",
+        inLanguage: ["es", "eu"],
+        publisher: { "@id": `${site}/#person` },
+      },
+      {
+        "@type": "Person",
+        "@id": `${site}/#person`,
+        name: "Sergio Moreno",
+        url: `${site}/${locale}`,
+        image: `${site}/images/sergio-moreno.jpg`,
+        jobTitle: locale === "eu" ? "Full Stack web garatzailea" : "Desarrollador web Full Stack",
+        description: t("description"),
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Zarautz",
+          addressRegion: "Gipuzkoa",
+          addressCountry: "ES",
+        },
+        knowsLanguage: ["es", "eu"],
+        knowsAbout: [
+          locale === "eu" ? "Web garapena" : "Desarrollo web",
+          "Backend",
+          "PHP",
+          "Symfony",
+          "Laravel",
+          "Java",
+          "Spring Boot",
+          "Python",
+          "FastAPI",
+          "TypeScript",
+          "Angular",
+          "PostgreSQL",
+          "MySQL",
+          "MongoDB",
+          "Docker",
+          locale === "eu" ? "Arkitektura hexagonala" : "Arquitectura hexagonal",
+          "DDD",
+        ],
+        sameAs: [
+          "https://github.com/tarteka",
+          "https://www.linkedin.com/in/sergio-moreno-tes",
+        ],
+      },
     ],
   };
 
@@ -111,7 +147,7 @@ export default async function LocaleLayout({
       >
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <Script
           src="https://stats.proyectozero.org/script.js"
