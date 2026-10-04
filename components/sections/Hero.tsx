@@ -3,6 +3,7 @@
 import { motion, useReducedMotion, useSpring } from "framer-motion";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { HiArrowRight, HiLocationMarker } from "react-icons/hi";
 import { HiArrowDownTray } from "react-icons/hi2";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
@@ -21,6 +22,43 @@ export function Hero() {
   const reduceMotion = useReducedMotion();
   const glowX = useSpring(0, { stiffness: 50, damping: 20 });
   const glowY = useSpring(0, { stiffness: 50, damping: 20 });
+
+  const name = t("name");
+  const [typedName, setTypedName] = useState(() => (reduceMotion ? name : ""));
+
+  useEffect(() => {
+    let cancelled = false;
+    let timeoutId: ReturnType<typeof setTimeout>;
+
+    if (reduceMotion) {
+      timeoutId = setTimeout(() => {
+        if (!cancelled) setTypedName(name);
+      }, 0);
+      return () => {
+        cancelled = true;
+        clearTimeout(timeoutId);
+      };
+    }
+
+    // Arranca justo cuando el <h1> empieza su propio fadeUp (delay del stagger),
+    // sin esperar a que el resto del Hero termine de entrar.
+    const typeChar = (i: number) => {
+      if (cancelled) return;
+      setTypedName(name.slice(0, i));
+      if (i < name.length) {
+        timeoutId = setTimeout(() => typeChar(i + 1), 70);
+      }
+    };
+    timeoutId = setTimeout(() => {
+      setTypedName("");
+      typeChar(1);
+    }, 250);
+
+    return () => {
+      cancelled = true;
+      clearTimeout(timeoutId);
+    };
+  }, [name, reduceMotion]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
     if (reduceMotion) return;
@@ -59,23 +97,6 @@ export function Hero() {
         animate="visible"
       >
         <div>
-          <motion.div
-            variants={fadeUp}
-            className="mb-8 flex flex-wrap items-center gap-3"
-          >
-            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-foreground">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-60" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-success" />
-              </span>
-              {t("available")}
-            </span>
-            <span className="inline-flex items-center gap-1.5 font-mono text-xs text-subtle">
-              <HiLocationMarker className="h-3.5 w-3.5" />
-              {t("location")}
-            </span>
-          </motion.div>
-
           <motion.p variants={fadeUp} className="mb-2 text-lg text-muted">
             {t("greeting")}
           </motion.p>
@@ -84,8 +105,9 @@ export function Hero() {
             variants={fadeUp}
             className="text-5xl font-semibold tracking-tighter text-foreground sm:text-6xl md:text-7xl lg:text-8xl"
           >
-            {t("name")}
-            <span className="text-accent">.</span>
+            <span aria-hidden>{typedName}</span>
+            <span className="sr-only">{name}</span>
+            <span className="animate-blink font-mono text-accent">_</span>
           </motion.h1>
 
           <motion.p
@@ -173,6 +195,11 @@ export function Hero() {
               className="object-cover"
             />
           </div>
+
+          <span className="absolute -bottom-4 left-1/2 inline-flex -translate-x-1/2 items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1.5 font-mono text-xs text-subtle shadow-sm">
+            <HiLocationMarker className="h-3.5 w-3.5" />
+            {t("location")}
+          </span>
         </motion.div>
       </motion.div>
     </section>

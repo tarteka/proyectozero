@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
 
     const { error } = await resend.emails.send({
       from: `ProyectoZero <${process.env.RESEND_FROM_EMAIL}>`,
-      to: process.env.CONTACT_EMAIL || "sergimoreno@outlook.com",
+      to: process.env.CONTACT_EMAIL || "contacto@proyectozero.org",
       replyTo: email,
       subject: `Contacto desde ProyectoZero.org - ${name}`,
       text: `Nombre: ${name}\nEmail: ${email}\n\nMensaje:\n${message}`,
