@@ -1,9 +1,15 @@
 "use client";
 
-import { motion, useReducedMotion, useSpring } from "framer-motion";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { HiArrowRight, HiLocationMarker } from "react-icons/hi";
 import { HiArrowDownTray } from "react-icons/hi2";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
@@ -17,11 +23,151 @@ const fadeUp = {
   },
 };
 
+// Patrón de estática TV: ruido generado con un filtro SVG feTurbulence.
+const noiseSvg =
+  "<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(#n)'/></svg>";
+const noiseDataUri = `url("data:image/svg+xml,${encodeURIComponent(noiseSvg)}")`;
+
+// Secuencias de la "sintonización": al entrar, la foto parpadea entre el
+// original y la versión pixel art junto con estática y líneas de escaneo
+// antes de asentarse; al salir, se revierte de forma más breve.
+const tuneIn = {
+  duration: 0.6,
+  times: [0, 0.08, 0.16, 0.24, 0.32, 0.45, 0.65, 1],
+  base: [1, 0.15, 0.8, 0.1, 0.55, 0.05, 0, 0],
+  pixel: [0, 0.7, 0.15, 0.75, 0.25, 0.85, 1, 1],
+  noise: [0, 0.85, 0.5, 0.9, 0.35, 0.5, 0, 0],
+  scan: [0, 0.55, 0.55, 0.5, 0.5, 0.35, 0.18, 0.18],
+  jitter: [0, -4, 3, -3, 2, -1, 0, 0],
+};
+const tuneOut = {
+  duration: 0.45,
+  times: [0, 0.2, 0.45, 0.7, 1],
+  base: [0, 0.6, 0.15, 0.7, 1],
+  pixel: [1, 0.5, 0.85, 0.3, 0],
+  noise: [0, 0.6, 0.3, 0.4, 0],
+  scan: [0.18, 0.4, 0.3, 0.2, 0],
+  jitter: [0, 2, -2, 1, 0],
+};
+
+function HeroPhoto({ location }: { location: string }) {
+  const reduceMotion = useReducedMotion();
+  const [hovered, setHovered] = useState(false);
+  const seq = hovered ? tuneIn : tuneOut;
+
+  const transition = reduceMotion
+    ? { duration: 0.2 }
+    : { duration: seq.duration, times: seq.times, ease: "linear" as const };
+
+  return (
+    <motion.div
+      variants={fadeUp}
+      className="group relative mx-auto w-56 sm:w-64 md:w-72"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* Marco de esquinas: aparece al hover, sin desplazar ni escalar la foto */}
+      <span
+        className="pointer-events-none absolute -left-2 -top-2 h-6 w-6 border-l-2 border-t-2 border-accent opacity-0 transition-opacity duration-300 motion-safe:group-hover:opacity-100"
+        aria-hidden
+      />
+      <span
+        className="pointer-events-none absolute -right-2 -top-2 h-6 w-6 border-r-2 border-t-2 border-accent opacity-0 transition-opacity duration-300 motion-safe:group-hover:opacity-100"
+        aria-hidden
+      />
+      <span
+        className="pointer-events-none absolute -bottom-2 -left-2 h-6 w-6 border-b-2 border-l-2 border-accent opacity-0 transition-opacity duration-300 motion-safe:group-hover:opacity-100"
+        aria-hidden
+      />
+      <span
+        className="pointer-events-none absolute -bottom-2 -right-2 h-6 w-6 border-b-2 border-r-2 border-accent opacity-0 transition-opacity duration-300 motion-safe:group-hover:opacity-100"
+        aria-hidden
+      />
+
+      <div className="relative aspect-4/5 overflow-hidden border border-border bg-surface-muted">
+        {/* Foto original */}
+        <motion.div
+          className="absolute inset-0"
+          animate={{ opacity: reduceMotion ? (hovered ? 0 : 1) : seq.base }}
+          transition={transition}
+        >
+          <Image
+            src="/images/sergio-moreno.jpg"
+            alt="Sergio Moreno"
+            fill
+            priority
+            sizes="(min-width: 768px) 288px, 256px"
+            className="object-cover"
+          />
+        </motion.div>
+
+        {/* Versión pixel art */}
+        <motion.div
+          className="absolute inset-0"
+          animate={{
+            opacity: reduceMotion ? (hovered ? 1 : 0) : seq.pixel,
+            x: reduceMotion ? 0 : seq.jitter,
+          }}
+          transition={transition}
+        >
+          <Image
+            src="/images/sergio-moreno-pixelart.jpg"
+            alt=""
+            fill
+            sizes="(min-width: 768px) 288px, 256px"
+            className="object-cover"
+          />
+        </motion.div>
+
+        {!reduceMotion && (
+          <>
+            {/* Líneas de escaneo */}
+            <motion.div
+              className="pointer-events-none absolute inset-0"
+              style={{
+                backgroundImage:
+                  "repeating-linear-gradient(to bottom, rgba(0,0,0,0.4) 0px, rgba(0,0,0,0.4) 1px, transparent 1px, transparent 3px)",
+              }}
+              animate={{ opacity: seq.scan }}
+              transition={transition}
+              aria-hidden
+            />
+
+            {/* Estática */}
+            <motion.div
+              className="pointer-events-none absolute inset-0 mix-blend-overlay"
+              style={{ backgroundImage: noiseDataUri, backgroundSize: "120px 120px" }}
+              animate={{ opacity: seq.noise }}
+              transition={transition}
+              aria-hidden
+            />
+          </>
+        )}
+      </div>
+
+      <span className="absolute -bottom-4 left-1/2 inline-flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full border border-border bg-surface px-3 py-1.5 font-mono text-xs text-subtle shadow-sm">
+        <HiLocationMarker className="h-3.5 w-3.5" />
+        {location}
+      </span>
+    </motion.div>
+  );
+}
+
 export function Hero() {
   const t = useTranslations("hero");
   const reduceMotion = useReducedMotion();
   const glowX = useSpring(0, { stiffness: 50, damping: 20 });
   const glowY = useSpring(0, { stiffness: 50, damping: 20 });
+
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const gridY = useTransform(scrollYProgress, [0, 1], [0, 80]);
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, -40]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0.3]);
+  const glowOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   const name = t("name");
   const [typedName, setTypedName] = useState(() => (reduceMotion ? name : ""));
@@ -76,17 +222,32 @@ export function Hero() {
   return (
     <section
       id="top"
+      ref={sectionRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className="relative overflow-hidden pt-32 pb-20 md:pt-44 md:pb-32"
     >
-      <div className="bg-grid absolute inset-0 -z-10" aria-hidden />
       <motion.div
-        style={{ x: glowX, y: glowY }}
+        style={{ y: reduceMotion ? 0 : gridY }}
+        className="bg-grid absolute inset-0 -z-10"
+        aria-hidden
+      />
+      <motion.div
+        style={{
+          x: glowX,
+          y: glowY,
+          opacity: reduceMotion ? 1 : glowOpacity,
+        }}
         className="absolute -top-40 left-1/2 -z-10 h-120 w-120 -translate-x-1/2 rounded-full bg-accent/10 blur-3xl"
         aria-hidden
       />
 
+      <motion.div
+        style={{
+          y: reduceMotion ? 0 : contentY,
+          opacity: reduceMotion ? 1 : contentOpacity,
+        }}
+      >
       <motion.div
         className="mx-auto grid max-w-6xl items-center gap-12 px-6 md:grid-cols-[1fr_auto] md:gap-16"
         variants={{
@@ -130,7 +291,7 @@ export function Hero() {
           >
             <a
               href="#portfolio"
-              className="group inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background transition-opacity hover:opacity-90"
+              className="group inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-accent-foreground transition-opacity hover:opacity-90"
             >
               {t("ctaPortfolio")}
               <HiArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -177,30 +338,8 @@ export function Hero() {
           </motion.div>
         </div>
 
-        <motion.div
-          variants={fadeUp}
-          className="group relative mx-auto w-56 sm:w-64 md:w-72"
-        >
-          <div
-            className="absolute inset-0 translate-x-3 translate-y-3 rounded-3xl border border-accent/40 bg-accent-soft transition-transform duration-500 ease-out motion-safe:group-hover:translate-x-5 motion-safe:group-hover:translate-y-5"
-            aria-hidden
-          />
-          <div className="relative aspect-4/5 overflow-hidden rounded-3xl border border-border bg-surface-muted transition-transform duration-500 ease-out motion-safe:group-hover:-translate-x-1 motion-safe:group-hover:-translate-y-1">
-            <Image
-              src="/images/sergio-moreno.jpg"
-              alt="Sergio Moreno"
-              fill
-              priority
-              sizes="(min-width: 768px) 288px, 256px"
-              className="object-cover"
-            />
-          </div>
-
-          <span className="absolute -bottom-4 left-1/2 inline-flex -translate-x-1/2 items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1.5 font-mono text-xs text-subtle shadow-sm">
-            <HiLocationMarker className="h-3.5 w-3.5" />
-            {t("location")}
-          </span>
-        </motion.div>
+        <HeroPhoto location={t("location")} />
+      </motion.div>
       </motion.div>
     </section>
   );

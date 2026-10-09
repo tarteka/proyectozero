@@ -46,7 +46,8 @@ export function EducationCarousel() {
   const goTo = (i: number) => {
     const track = trackRef.current;
     if (!track) return;
-    track.scrollTo({ left: i * track.clientWidth, behavior: "smooth" });
+    const clamped = Math.max(0, Math.min(i, degrees.length - 1));
+    track.scrollTo({ left: clamped * track.clientWidth, behavior: "smooth" });
   };
 
   const handleScroll = () => {
@@ -56,7 +57,7 @@ export function EducationCarousel() {
   };
 
   const arrowClass =
-    "cursor-pointer inline-flex h-8 w-8 items-center justify-center rounded-full border border-border text-muted transition-colors hover:bg-surface-muted hover:text-foreground disabled:cursor-default disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-muted";
+    "cursor-pointer inline-flex h-8 w-8 items-center justify-center rounded-full border border-border text-muted transition-colors hover:border-accent/40 hover:bg-accent-soft hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 disabled:cursor-default disabled:opacity-40 disabled:hover:border-border disabled:hover:bg-transparent disabled:hover:text-muted";
 
   return (
     <div
@@ -167,7 +168,7 @@ export function EducationCarousel() {
             aria-label={t("goTo", { n: i + 1 })}
             aria-current={index === i}
             className={`cursor-pointer h-1.5 rounded-full transition-all ${
-              index === i ? "w-6 bg-foreground" : "w-1.5 bg-border hover:bg-subtle"
+              index === i ? "w-6 bg-accent" : "w-1.5 bg-border hover:bg-subtle"
             }`}
           />
         ))}

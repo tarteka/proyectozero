@@ -12,10 +12,10 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 const EMAIL = "contacto@proyectozero.org";
 
 const buttonColors = {
-  idle: "bg-foreground text-background hover:opacity-90",
-  loading: "bg-foreground text-background",
+  idle: "bg-accent text-accent-foreground hover:opacity-90",
+  loading: "bg-accent text-accent-foreground",
   success: "bg-success text-background",
-  error: "bg-accent text-accent-foreground",
+  error: "bg-red-600 text-white dark:bg-red-500",
 } as const;
 
 const buttonLabels = {

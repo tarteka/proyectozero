@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useReducedMotion, useScroll } from 'framer-motion';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { useRef } from 'react';
 import type { IconType } from 'react-icons';
@@ -56,6 +56,7 @@ function TimelineLine() {
   const ref = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start 75%', 'end 75%'] });
+  const arrowOpacity = useTransform(scrollYProgress, [0.85, 1], [0, 1]);
 
   return (
     <div ref={ref} aria-hidden className="absolute left-5 top-10 bottom-0 w-px bg-border">
@@ -64,7 +65,13 @@ function TimelineLine() {
         className="absolute inset-0 origin-top bg-accent"
       />
       <span className="absolute bottom-1.5 left-1/2 flex h-5 w-5 -translate-x-1/2 items-center justify-center rounded-full bg-surface-muted">
-        <HiChevronDown className="h-3 w-3 text-subtle" />
+        <HiChevronDown className="absolute h-3 w-3 text-subtle" />
+        <motion.span
+          className="absolute inset-0 flex items-center justify-center"
+          style={{ opacity: reduceMotion ? 1 : arrowOpacity }}
+        >
+          <HiChevronDown className="h-3 w-3 text-accent" />
+        </motion.span>
       </span>
     </div>
   );
