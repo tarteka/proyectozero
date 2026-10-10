@@ -59,28 +59,36 @@ function HeroPhoto({ location }: { location: string }) {
     ? { duration: 0.2 }
     : { duration: seq.duration, times: seq.times, ease: "linear" as const };
 
+  const handleClick = () => {
+    if (typeof window !== "undefined" && window.matchMedia("(hover: hover)").matches) {
+      return;
+    }
+    setHovered((v) => !v);
+  };
+
   return (
     <motion.div
       variants={fadeUp}
       className="group relative mx-auto w-56 sm:w-64 md:w-72"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onClick={handleClick}
     >
-      {/* Marco de esquinas: aparece al hover, sin desplazar ni escalar la foto */}
+      {/* Marco de esquinas: aparece al hover (o al tap en táctil), sin desplazar ni escalar la foto */}
       <span
-        className="pointer-events-none absolute -left-2 -top-2 h-6 w-6 border-l-2 border-t-2 border-accent opacity-0 transition-opacity duration-300 motion-safe:group-hover:opacity-100"
+        className={`pointer-events-none absolute -left-2 -top-2 h-6 w-6 border-l-2 border-t-2 border-accent opacity-0 transition-opacity duration-300 motion-safe:group-hover:opacity-100 ${!reduceMotion && hovered ? "opacity-100" : ""}`}
         aria-hidden
       />
       <span
-        className="pointer-events-none absolute -right-2 -top-2 h-6 w-6 border-r-2 border-t-2 border-accent opacity-0 transition-opacity duration-300 motion-safe:group-hover:opacity-100"
+        className={`pointer-events-none absolute -right-2 -top-2 h-6 w-6 border-r-2 border-t-2 border-accent opacity-0 transition-opacity duration-300 motion-safe:group-hover:opacity-100 ${!reduceMotion && hovered ? "opacity-100" : ""}`}
         aria-hidden
       />
       <span
-        className="pointer-events-none absolute -bottom-2 -left-2 h-6 w-6 border-b-2 border-l-2 border-accent opacity-0 transition-opacity duration-300 motion-safe:group-hover:opacity-100"
+        className={`pointer-events-none absolute -bottom-2 -left-2 h-6 w-6 border-b-2 border-l-2 border-accent opacity-0 transition-opacity duration-300 motion-safe:group-hover:opacity-100 ${!reduceMotion && hovered ? "opacity-100" : ""}`}
         aria-hidden
       />
       <span
-        className="pointer-events-none absolute -bottom-2 -right-2 h-6 w-6 border-b-2 border-r-2 border-accent opacity-0 transition-opacity duration-300 motion-safe:group-hover:opacity-100"
+        className={`pointer-events-none absolute -bottom-2 -right-2 h-6 w-6 border-b-2 border-r-2 border-accent opacity-0 transition-opacity duration-300 motion-safe:group-hover:opacity-100 ${!reduceMotion && hovered ? "opacity-100" : ""}`}
         aria-hidden
       />
 
