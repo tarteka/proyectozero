@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, useInView, useReducedMotion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 import { Reveal } from "./Reveal";
 
 interface SectionHeadingProps {
@@ -16,13 +17,18 @@ function IndexCounter({ index }: { index: string }) {
   const target = parseInt(index, 10);
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = useReducedMotionSafe();
   const [value, setValue] = useState(() =>
     reduceMotion || Number.isNaN(target) ? target : 0
   );
 
   useEffect(() => {
-    if (!inView || reduceMotion || Number.isNaN(target)) return;
+    if (!inView || Number.isNaN(target)) return;
+    if (reduceMotion) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setValue(target);
+      return;
+    }
     let current = 0;
     const id = setInterval(() => {
       current += 1;

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useRef, useState } from "react";
@@ -11,6 +11,7 @@ import { TbArrowsExchange } from "react-icons/tb";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { projects, type Project, type ProjectStatus } from "@/lib/projects";
+import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 
 const statusStyles: Record<ProjectStatus, string> = {
   live: "bg-success-soft text-success",
@@ -33,7 +34,7 @@ function ProjectScreen({ project }: { project: Project }) {
   const [expanded, setExpanded] = useState(false);
 
   const mediaRef = useRef<HTMLDivElement>(null);
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = useReducedMotionSafe();
   const { scrollYProgress } = useScroll({
     target: mediaRef,
     offset: ["start 95%", "start 55%"],

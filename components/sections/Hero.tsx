@@ -2,7 +2,6 @@
 
 import {
   motion,
-  useReducedMotion,
   useScroll,
   useSpring,
   useTransform,
@@ -13,6 +12,7 @@ import { useEffect, useRef, useState } from "react";
 import { HiArrowRight, HiLocationMarker } from "react-icons/hi";
 import { HiArrowDownTray } from "react-icons/hi2";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -51,7 +51,7 @@ const tuneOut = {
 };
 
 function HeroPhoto({ location }: { location: string }) {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = useReducedMotionSafe();
   const [hovered, setHovered] = useState(false);
   const seq = hovered ? tuneIn : tuneOut;
 
@@ -163,7 +163,7 @@ function HeroPhoto({ location }: { location: string }) {
 
 export function Hero() {
   const t = useTranslations("hero");
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = useReducedMotionSafe();
   const glowX = useSpring(0, { stiffness: 50, damping: 20 });
   const glowY = useSpring(0, { stiffness: 50, damping: 20 });
 

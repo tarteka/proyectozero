@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { useRef } from 'react';
 import type { IconType } from 'react-icons';
@@ -13,6 +13,7 @@ import {
   HiCommandLine,
 } from 'react-icons/hi2';
 import { Reveal } from '@/components/ui/Reveal';
+import { useReducedMotionSafe } from '@/lib/useReducedMotionSafe';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 
 interface Job {
@@ -54,7 +55,7 @@ const jobs: Job[] = [
 
 function TimelineLine() {
   const ref = useRef<HTMLDivElement>(null);
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = useReducedMotionSafe();
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start 75%', 'end 75%'] });
   const arrowOpacity = useTransform(scrollYProgress, [0.85, 1], [0, 1]);
 
