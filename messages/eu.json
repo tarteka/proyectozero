@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Sergio Moreno · Full Stack web garatzailea Gipuzkoan",
-    "description": "Sergio Moreno, Full Stack web garatzailea Zarautzen (Gipuzkoa), backend arloan espezializatua: PHP, Symfony, Java eta Python. Proiektuak, esperientzia eta kontaktua."
+    "title": "Web garapena Gipuzkoan | ProyectoZero · Sergio Moreno",
+    "description": "Web garapena Gipuzkoan proiektu eta enpresentzat. Sergio Moreno, Zarauzko Full Stack web garatzailea, PHP, Symfony, Java, Python eta TypeScript teknologietan espezializatua."
   },
   "nav": {
     "about": "Nitaz",
@@ -18,16 +18,16 @@
     "location": "Zarautz (Gipuzkoa)",
     "greeting": "Kaixo, ni naiz",
     "name": "Sergio Moreno",
-    "role": "Web garatzailea · Full Stack",
-    "description": "Aplikazio erabilgarriak eta ondo eginak eraikitzen ditut PHP, Java eta TypeScript-ekin: APIaren diseinutik hasi eta Docker bidezko hedapeneraino.",
+    "role": "Web garapena Gipuzkoan",
+    "description": "Neurrira egindako web aplikazioak garatzen ditut, teknologia proiektu bakoitzaren beharretara egokituz.",
     "ctaPortfolio": "Proiektuak ikusi",
     "ctaContact": "Harremanetan jarri",
     "cv": "CVa deskargatu"
   },
   "about": {
     "eyebrow": "Nitaz",
-    "title": "Larrialdietatik kodera",
-    "intro": "Sergio dut izena eta Zarauztarra naiz. 20 urte baino gehiago daramatzat osasun arloan Osasun-Larrialdietako Teknikaria (OLT) gisa lan egiten. Lan bat zeinak liluratu egiten nauen eta non nire erosotasun gunean bainaiz. Baina ez naiz geldirik egoten: duela ez asko Web Aplikazioen Garapena ikastea erabaki nuen. Programazioa jakin-mina izatetik benetan gozatzen dudan zerbait izatera pasa zen, batez ere backend-a.",
+    "title": "Larrialdietatik web garapenera",
+    "intro": "Sergio dut izena, Zarauztarra naiz eta Gipuzkoan web garatzaile gisa lan egiten dut. 20 urte baino gehiago daramatzat osasun arloan Osasun-Larrialdietako Teknikaria (OLT) gisa lan egiten. Lan bat zeinak liluratu egiten nauen eta non nire erosotasun gunean bainaiz. Baina ez naiz geldirik egoten: duela ez asko Web Aplikazioen Garapena ikastea erabaki nuen. Programazioa jakin-mina izatetik benetan gozatzen dudan zerbait izatera pasa zen, batez ere backend-a.",
     "philosophy": "Etengabeko prestakuntzan dagoen garatzaile gisa, aurrera egin dut irmotasunez, jakin-minaz eta ikasteko gogo handiaz. Nire filosofia: ikasi, bidea gozatu eta inoiz ez galdu irribarra.",
     "yearsValue": "20+",
     "yearsLabel": "urte osasun-larrialdietan",
@@ -58,7 +58,7 @@
   "experience": {
     "eyebrow": "Esperientzia",
     "title": "Ibilbidea",
-    "subtitle": "Larrialdietako lanetik backend garapenera, ingurune profesional batean.",
+    "subtitle": "Larrialdietako lanetik web garapenera, ingurune profesional batean.",
     "items": {
       "ambulancias": {
         "role": "Full Stack garatzailea",
@@ -150,7 +150,7 @@
   "contact": {
     "eyebrow": "Kontaktua",
     "title": "Hitz egingo dugu?",
-    "subtitle": "Proiektu bat duzu buruan edo zerbait esan nahi didazu? Idatzi eta ahalik eta lasterren erantzungo dizut.",
+    "subtitle": "Web garapena edo neurrira egindako aplikazio bat behar duzu Gipuzkoan? Kontatu zure proiektua eta ahalik eta lasterren erantzungo dizut.",
     "name": "Izena",
     "email": "Emaila",
     "message": "Mezua",
@@ -162,7 +162,7 @@
     "orEmail": "Edo idatzi zuzenean helbide honetara:"
   },
   "footer": {
-    "credits": "Sergio Morenok diseinatua eta garatua",
+    "credits": "Web diseinua eta garapena Gipuzkoan, ♥-rekin Sergio Morenoren eskutik",
     "backToTop": "Gora itzuli"
   }
 }
