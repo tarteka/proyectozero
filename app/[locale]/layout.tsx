@@ -39,23 +39,24 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "metadata" });
   const other = locales.find((l) => l !== locale) ?? "es";
+  const localePath = locale === "es" ? "/" : `/${locale}`;
 
   return {
     metadataBase: new URL("https://proyectozero.org"),
     title: t("title"),
     description: t("description"),
     alternates: {
-      canonical: `/${locale}`,
+      canonical: localePath,
       languages: {
-        es: "/es",
+        es: "/",
         eu: "/eu",
-        "x-default": "/es",
+        "x-default": "/",
       },
     },
     openGraph: {
       title: t("title"),
       description: t("description"),
-      url: `/${locale}`,
+      url: localePath,
       siteName: "ProyectoZero",
       locale: ogLocale[locale as (typeof locales)[number]] ?? ogLocale.es,
       alternateLocale: ogLocale[other],
@@ -85,6 +86,7 @@ export default async function LocaleLayout({
   const messages = await getMessages();
   const t = await getTranslations({ locale, namespace: "metadata" });
   const site = "https://proyectozero.org";
+  const localePath = locale === "es" ? "" : `/${locale}`;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -101,7 +103,7 @@ export default async function LocaleLayout({
         "@type": "Person",
         "@id": `${site}/#person`,
         name: "Sergio Moreno",
-        url: `${site}/${locale}`,
+        url: `${site}${localePath}`,
         image: `${site}/images/sergio-moreno.jpg`,
         jobTitle: locale === "eu" ? "Full Stack web garatzailea" : "Desarrollador web Full Stack",
         description: t("description"),

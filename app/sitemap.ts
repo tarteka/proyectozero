@@ -4,10 +4,13 @@ const locales = ["es", "eu"] as const;
 const base = "https://proyectozero.org";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const languages = Object.fromEntries(locales.map((l) => [l, `${base}/${l}`]));
+  const languages = {
+    es: base,
+    eu: `${base}/eu`,
+  };
 
   return locales.map((locale) => ({
-    url: `${base}/${locale}`,
+    url: locale === "es" ? base : `${base}/${locale}`,
     lastModified: new Date(),
     changeFrequency: "monthly",
     alternates: { languages },

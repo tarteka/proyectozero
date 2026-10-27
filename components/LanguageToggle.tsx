@@ -16,7 +16,11 @@ export function LanguageToggle() {
 
   const handleLanguageChange = (newLocale: string) => {
     if (newLocale === locale) return;
-    const newPathname = pathname.replace(`/${locale}`, `/${newLocale}`);
+    const pathWithoutLocale = pathname.replace(/^\/(?:es|eu)(?=\/|$)/, "") || "/";
+    const newPathname =
+      newLocale === "es"
+        ? pathWithoutLocale
+        : `/${newLocale}${pathWithoutLocale === "/" ? "" : pathWithoutLocale}`;
     router.replace(newPathname, { scroll: false });
   };
 
