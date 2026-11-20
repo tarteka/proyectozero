@@ -1,37 +1,17 @@
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
-import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import Script from "next/script";
-import "../globals.css";
-import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import type { Metadata } from "next";
+import { HtmlLang } from "@/components/providers/HtmlLang";
 import { MotionProvider } from "@/components/providers/MotionProvider";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ScrollToTop } from "@/components/ScrollToTop";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 const locales = ["es", "eu"] as const;
 const ogLocale: Record<(typeof locales)[number], string> = {
   es: "es_ES",
   eu: "eu_ES",
-};
-
-export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fafaf9" },
-    { media: "(prefers-color-scheme: dark)", color: "#0b0b0d" },
-  ],
 };
 
 export function generateStaticParams() {
@@ -44,6 +24,9 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
+  // Rutas como /favicon.ico o /service-worker.js llegan aquí como "idioma":
+  // el layout responde 404, sin intentar cargar mensajes que no existen.
+  if (!(locales as readonly string[]).includes(locale)) return {};
   const t = await getTranslations({ locale, namespace: "metadata" });
   const other = locales.find((l) => l !== locale) ?? "es";
   const localePath = locale === "es" ? "/" : `/${locale}`;
@@ -150,45 +133,24 @@ export default async function LocaleLayout({
   };
 
   return (
-    <html lang={locale} suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://stats.proyectozero.org" />
-      </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} bg-background font-sans text-foreground antialiased`}
-        suppressHydrationWarning
+    <NextIntlClientProvider messages={messages}>
+      <HtmlLang />
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-100 focus:rounded-none focus:bg-accent focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-accent-foreground"
       >
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-100 focus:rounded-none focus:bg-accent focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-accent-foreground"
-        >
-          {tNav("skipToContent")}
-        </a>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-        <Script
-          src="https://stats.proyectozero.org/script.js"
-          data-website-id="c700ad72-dc6c-4608-97a1-2c6dc3c87d67"
-          strategy="afterInteractive"
-        />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          storageKey="proyectozero-theme"
-        >
-          <NextIntlClientProvider messages={messages}>
-            <MotionProvider>
-              <Navbar />
-              {children}
-              <Footer />
-              <ScrollToTop />
-            </MotionProvider>
-          </NextIntlClientProvider>
-        </ThemeProvider>
-      </body>
-    </html>
+        {tNav("skipToContent")}
+      </a>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <MotionProvider>
+        <Navbar />
+        {children}
+        <Footer />
+        <ScrollToTop />
+      </MotionProvider>
+    </NextIntlClientProvider>
   );
 }

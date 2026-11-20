@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { useInstantEntrance } from "@/components/providers/MotionProvider";
 import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 import { Reveal } from "./Reveal";
 
@@ -18,13 +19,14 @@ function IndexCounter({ index }: { index: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const reduceMotion = useReducedMotionSafe();
+  const instant = useInstantEntrance();
   const [value, setValue] = useState(() =>
-    reduceMotion || Number.isNaN(target) ? target : 0
+    reduceMotion || instant || Number.isNaN(target) ? target : 0
   );
 
   useEffect(() => {
     if (!inView || Number.isNaN(target)) return;
-    if (reduceMotion) {
+    if (reduceMotion || instant) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setValue(target);
       return;
@@ -36,7 +38,7 @@ function IndexCounter({ index }: { index: string }) {
       if (current >= target) clearInterval(id);
     }, 90);
     return () => clearInterval(id);
-  }, [inView, reduceMotion, target]);
+  }, [inView, reduceMotion, instant, target]);
 
   if (Number.isNaN(target)) {
     return <span ref={ref}>{index}</span>;

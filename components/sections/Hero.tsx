@@ -12,6 +12,7 @@ import { useEffect, useRef, useState } from "react";
 import { HiArrowRight, HiLocationMarker } from "react-icons/hi";
 import { HiArrowDownTray } from "react-icons/hi2";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { useInstantEntrance } from "@/components/providers/MotionProvider";
 import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 
 const fadeUp = {
@@ -177,14 +178,15 @@ export function Hero() {
   const contentOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0.3]);
   const glowOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
+  const instant = useInstantEntrance();
   const name = t("name");
-  const [typedName, setTypedName] = useState(() => (reduceMotion ? name : ""));
+  const [typedName, setTypedName] = useState(() => (reduceMotion || instant ? name : ""));
 
   useEffect(() => {
     let cancelled = false;
     let timeoutId: ReturnType<typeof setTimeout>;
 
-    if (reduceMotion) {
+    if (reduceMotion || instant) {
       timeoutId = setTimeout(() => {
         if (!cancelled) setTypedName(name);
       }, 0);
@@ -212,7 +214,7 @@ export function Hero() {
       cancelled = true;
       clearTimeout(timeoutId);
     };
-  }, [name, reduceMotion]);
+  }, [name, reduceMotion, instant]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
     if (reduceMotion) return;

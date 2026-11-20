@@ -2,6 +2,7 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
+import { markLocaleSwitch } from "@/lib/localeSwitch";
 
 const languages = [
   { code: "es", label: "ES", name: "Español" },
@@ -24,6 +25,7 @@ export function LanguageToggle() {
     // valiendo el anterior, redirige de "/" a "/eu" y el cambio a español no
     // hace nada. Se actualiza antes de navegar.
     saveLocaleCookie(newLocale);
+    markLocaleSwitch();
     const pathWithoutLocale = pathname.replace(/^\/(?:es|eu)(?=\/|$)/, "") || "/";
     const newPathname =
       newLocale === "es"
