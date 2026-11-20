@@ -12,7 +12,8 @@
     "openMenu": "Menua ireki",
     "closeMenu": "Menua itxi",
     "toggleTheme": "Gaia aldatu",
-    "language": "Hizkuntza"
+    "language": "Hizkuntza",
+    "skipToContent": "Eduki nagusira joan"
   },
   "hero": {
     "location": "Zarautz (Gipuzkoa)",
@@ -155,11 +156,20 @@
     "email": "Emaila",
     "message": "Mezua",
     "send": "Mezua bidali",
-    "sending": "Bidaltzen...",
+    "sending": "Bidaltzen…",
     "sent": "Bidalita",
     "failed": "Ez da bidali",
     "error": "Errorea mezua bidaltzean. Saiatu berriro.",
-    "orEmail": "Edo idatzi zuzenean helbide honetara:"
+    "orEmail": "Edo idatzi zuzenean helbide honetara:",
+    "namePlaceholder": "Zure izena…",
+    "emailPlaceholder": "zu@emaila.com",
+    "messagePlaceholder": "Kontatu zure proiektua…",
+    "validation": {
+      "nameRequired": "Idatzi zure izena.",
+      "emailRequired": "Idatzi zure emaila.",
+      "emailInvalid": "Idatzi baliozko email helbide bat, adibidez zu@emaila.com.",
+      "messageRequired": "Idatzi zure mezua."
+    }
   },
   "footer": {
     "credits": "Web diseinua eta garapena Gipuzkoan, ♥-rekin Sergio Morenoren eskutik",

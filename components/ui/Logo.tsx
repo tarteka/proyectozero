@@ -1,6 +1,6 @@
 export function Logo({ className = "" }: { className?: string }) {
   return (
-    <span className={`inline-flex items-center gap-2 ${className}`}>
+    <span translate="no" className={`inline-flex items-center gap-2 ${className}`}>
       <svg viewBox="0 0 100 100" className="h-8 w-8" aria-hidden>
         <defs>
           <mask id="logo-ring-cut">

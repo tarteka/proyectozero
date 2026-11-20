@@ -44,7 +44,7 @@ export function Navbar() {
     <header
       className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${
         scrolled || open
-          ? "border-border bg-background/80 backdrop-blur-md"
+          ? "border-line bg-background/80 backdrop-blur-md"
           : "border-transparent bg-transparent"
       }`}
     >
@@ -58,16 +58,17 @@ export function Navbar() {
             <li key={id}>
               <a
                 href={`#${id}`}
-                className={`relative isolate block rounded-full px-3.5 py-2 text-sm transition-colors ${
+                aria-current={active === id ? "location" : undefined}
+                className={`relative isolate block rounded-none border border-transparent px-3.5 py-2 text-sm transition-colors ${
                   active === id
-                    ? "text-foreground"
-                    : "text-muted hover:text-foreground"
+                    ? "font-medium text-accent"
+                    : "text-muted hover:border-line hover:bg-surface-muted hover:text-foreground"
                 }`}
               >
                 {active === id && (
                   <motion.span
                     layoutId="nav-active"
-                    className="absolute inset-0 -z-10 rounded-full border border-border bg-surface-muted"
+                    className="absolute -inset-px -z-10 rounded-none border border-accent bg-accent-soft"
                     transition={{ type: "spring", stiffness: 380, damping: 32 }}
                   />
                 )}
@@ -84,7 +85,7 @@ export function Navbar() {
           </div>
           <button
             onClick={() => setOpen((v) => !v)}
-            className="cursor-pointer inline-flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground md:hidden"
+            className="cursor-pointer inline-flex h-9 w-9 items-center justify-center rounded-none border border-line text-foreground md:hidden"
             aria-label={open ? t("closeMenu") : t("openMenu")}
             aria-expanded={open}
           >
@@ -100,7 +101,7 @@ export function Navbar() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="overflow-hidden border-t border-border md:hidden"
+            className="overflow-hidden border-t border-line md:hidden"
           >
             <ul className="mx-auto flex max-w-6xl flex-col px-6 py-4">
               {sections.map((id) => (
@@ -118,7 +119,8 @@ export function Navbar() {
                         document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
                       }, 300);
                     }}
-                    className="block py-3 text-lg font-medium text-foreground"
+                    aria-current={active === id ? "location" : undefined}
+                    className={`block py-3 text-lg font-medium ${active === id ? "text-accent" : "text-foreground"}`}
                   >
                     {t(id)}
                   </a>

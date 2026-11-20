@@ -8,6 +8,10 @@ const languages = [
   { code: "eu", label: "EU", name: "Euskara" },
 ];
 
+function saveLocaleCookie(locale: string) {
+  document.cookie = `NEXT_LOCALE=${locale}; path=/; max-age=31536000; samesite=lax`;
+}
+
 export function LanguageToggle() {
   const t = useTranslations("nav");
   const locale = useLocale();
@@ -16,6 +20,10 @@ export function LanguageToggle() {
 
   const handleLanguageChange = (newLocale: string) => {
     if (newLocale === locale) return;
+    // El middleware de next-intl recuerda el idioma en esta cookie y, si sigue
+    // valiendo el anterior, redirige de "/" a "/eu" y el cambio a español no
+    // hace nada. Se actualiza antes de navegar.
+    saveLocaleCookie(newLocale);
     const pathWithoutLocale = pathname.replace(/^\/(?:es|eu)(?=\/|$)/, "") || "/";
     const newPathname =
       newLocale === "es"
@@ -28,7 +36,7 @@ export function LanguageToggle() {
     <div
       role="group"
       aria-label={t("language")}
-      className="inline-flex h-9 items-center rounded-full border border-border p-0.5"
+      className="inline-flex h-9 items-center rounded-none border border-line p-0.5"
     >
       {languages.map((lang) => {
         const active = locale === lang.code;
@@ -38,7 +46,7 @@ export function LanguageToggle() {
             onClick={() => handleLanguageChange(lang.code)}
             aria-pressed={active}
             title={lang.name}
-            className={`cursor-pointer h-full rounded-full px-2.5 text-xs font-semibold transition-colors ${
+            className={`cursor-pointer h-full rounded-none px-2.5 text-xs font-semibold transition-colors ${
               active
                 ? "bg-foreground text-background"
                 : "text-muted hover:text-foreground"

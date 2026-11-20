@@ -92,7 +92,7 @@ function HeroPhoto({ location }: { location: string }) {
         aria-hidden
       />
 
-      <div className="relative aspect-4/5 overflow-hidden border border-border bg-surface-muted">
+      <div className="relative aspect-4/5 overflow-hidden border border-line bg-surface-muted shadow-block">
         {/* Foto original */}
         <motion.div
           className="absolute inset-0"
@@ -153,7 +153,7 @@ function HeroPhoto({ location }: { location: string }) {
         )}
       </div>
 
-      <span className="absolute -bottom-4 left-1/2 inline-flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full border border-border bg-surface px-3 py-1.5 font-mono text-xs text-subtle shadow-sm">
+      <span className="absolute -bottom-4 left-1/2 inline-flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-none border border-line bg-surface px-3 py-1.5 font-mono text-xs text-subtle">
         <HiLocationMarker className="h-3.5 w-3.5" />
         {location}
       </span>
@@ -299,14 +299,14 @@ export function Hero() {
           >
             <a
               href="#portfolio"
-              className="group inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-accent-foreground transition-opacity hover:opacity-90"
+              className="group inline-flex items-center gap-2 lift rounded-none border border-line bg-accent px-6 py-3 text-sm font-semibold text-accent-foreground"
             >
               {t("ctaPortfolio")}
               <HiArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </a>
             <a
               href="#contact"
-              className="inline-flex items-center rounded-full border border-border bg-surface px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-surface-muted"
+              className="lift inline-flex items-center rounded-none border border-line bg-surface px-6 py-3 text-sm font-semibold text-foreground"
             >
               {t("ctaContact")}
             </a>
@@ -319,7 +319,7 @@ export function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full text-muted transition-colors hover:bg-surface-muted hover:text-foreground"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-none text-muted transition-colors hover:bg-surface-muted hover:text-foreground"
               >
                 <FaGithub className="h-5 w-5" />
               </a>
@@ -328,7 +328,7 @@ export function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full text-muted transition-colors hover:bg-surface-muted hover:text-foreground"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-none text-muted transition-colors hover:bg-surface-muted hover:text-foreground"
               >
                 <FaLinkedin className="h-5 w-5" />
               </a>
@@ -337,7 +337,7 @@ export function Hero() {
                 download="sergio-moreno-cv.pdf"
                 aria-label={t("cv")}
                 title={t("cv")}
-                className="inline-flex h-11 items-center gap-1.5 rounded-full px-3 text-sm font-medium text-muted transition-colors hover:bg-surface-muted hover:text-foreground"
+                className="inline-flex h-11 items-center gap-1.5 rounded-none px-3 text-sm font-medium text-muted transition-colors hover:bg-surface-muted hover:text-foreground"
               >
                 <HiArrowDownTray className="h-4 w-4" />
                 CV

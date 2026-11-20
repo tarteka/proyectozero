@@ -12,7 +12,8 @@
     "openMenu": "Abrir menú",
     "closeMenu": "Cerrar menú",
     "toggleTheme": "Cambiar tema",
-    "language": "Idioma"
+    "language": "Idioma",
+    "skipToContent": "Saltar al contenido"
   },
   "hero": {
     "location": "Zarautz (Gipuzkoa)",
@@ -155,11 +156,20 @@
     "email": "Email",
     "message": "Mensaje",
     "send": "Enviar mensaje",
-    "sending": "Enviando...",
+    "sending": "Enviando…",
     "sent": "Enviado",
     "failed": "No se ha enviado",
     "error": "Error al enviar el mensaje. Inténtalo de nuevo.",
-    "orEmail": "O escríbeme directamente a"
+    "orEmail": "O escríbeme directamente a",
+    "namePlaceholder": "Tu nombre…",
+    "emailPlaceholder": "tu@email.com",
+    "messagePlaceholder": "Cuéntame tu proyecto…",
+    "validation": {
+      "nameRequired": "Escribe tu nombre.",
+      "emailRequired": "Escribe tu email.",
+      "emailInvalid": "Escribe un email válido, por ejemplo tu@email.com.",
+      "messageRequired": "Escribe tu mensaje."
+    }
   },
   "footer": {
     "credits": "Diseño y desarrollo web en Gipuzkoa con ♥ por Sergio Moreno",

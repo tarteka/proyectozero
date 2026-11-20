@@ -10,12 +10,16 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const EMAIL = "contacto@proyectozero.org";
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+type Field = "name" | "email" | "message";
+type FieldErrors = Partial<Record<Field, "required" | "invalid">>;
 
 const buttonColors = {
   idle: "bg-accent text-accent-foreground hover:opacity-90",
   loading: "bg-accent text-accent-foreground",
   success: "bg-success text-background",
-  error: "bg-red-600 text-white dark:bg-red-500",
+  error: "bg-danger text-background",
 } as const;
 
 const buttonLabels = {
@@ -26,7 +30,24 @@ const buttonLabels = {
 } as const;
 
 const inputClass =
-  "w-full rounded-lg border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-subtle transition-colors focus:border-accent focus:outline-none focus:ring-4 focus:ring-accent/15";
+  "w-full rounded-none border border-line bg-background px-4 py-3 text-sm text-foreground placeholder:text-subtle transition-[border-color,box-shadow] focus:border-accent focus:outline-none focus:shadow-[3px_3px_0_0_var(--accent)]";
+
+const invalidInputClass =
+  "border-danger shadow-[3px_3px_0_0_var(--danger)]";
+
+function FieldError({ id, message }: { id: string; message: string }) {
+  return (
+    <p id={id} className="mt-2 flex items-start gap-2 text-sm font-medium text-danger">
+      <span
+        className="mt-0.5 inline-flex h-4 w-4 shrink-0 items-center justify-center border border-current font-mono text-[11px] leading-none"
+        aria-hidden
+      >
+        !
+      </span>
+      {message}
+    </p>
+  );
+}
 
 export function Contact() {
   const t = useTranslations("contact");
@@ -39,8 +60,41 @@ export function Contact() {
     "idle" | "loading" | "success" | "error"
   >("idle");
 
+  const [errors, setErrors] = useState<FieldErrors>({});
+
+  const validate = (): FieldErrors => {
+    const result: FieldErrors = {};
+    if (!formData.name.trim()) result.name = "required";
+    if (!formData.email.trim()) result.email = "required";
+    else if (!EMAIL_PATTERN.test(formData.email.trim())) result.email = "invalid";
+    if (!formData.message.trim()) result.message = "required";
+    return result;
+  };
+
+  const errorText = (field: Field): string | null => {
+    const kind = errors[field];
+    if (!kind) return null;
+    if (field === "name") return t("validation.nameRequired");
+    if (field === "message") return t("validation.messageRequired");
+    return kind === "invalid" ? t("validation.emailInvalid") : t("validation.emailRequired");
+  };
+
+  const fieldProps = (field: Field) => ({
+    "aria-invalid": errors[field] ? (true as const) : undefined,
+    "aria-describedby": errors[field] ? `${field}-error` : undefined,
+  });
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const found = validate();
+    setErrors(found);
+    const firstInvalid = (["name", "email", "message"] as const).find((f) => found[f]);
+    if (firstInvalid) {
+      document.getElementById(firstInvalid)?.focus();
+      return;
+    }
+
     setStatus("loading");
 
     try {
@@ -69,16 +123,16 @@ export function Contact() {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    // El aviso de un campo desaparece en cuanto se vuelve a editar
+    setErrors((prev) => (prev[name as Field] ? { ...prev, [name]: undefined } : prev));
   };
 
   return (
     <section
       id="contact"
-      className="border-t border-border py-24 md:py-32"
+      className="border-t border-line py-24 md:py-32"
     >
       <div className="mx-auto grid max-w-6xl gap-12 px-6 md:grid-cols-[1fr_1.15fr] md:gap-16">
         <div>
@@ -94,7 +148,7 @@ export function Contact() {
             <p className="text-sm text-muted">{t("orEmail")}</p>
             <a
               href={`mailto:${EMAIL}`}
-              className="group inline-flex items-center gap-3 rounded-xl border border-border bg-surface px-4 py-3 text-sm font-medium text-foreground transition-colors hover:border-accent"
+              className="group lift inline-flex items-center gap-3 rounded-none border border-line bg-surface px-4 py-3 text-sm font-medium text-foreground"
             >
               <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent-soft text-accent">
                 <HiMail className="h-4 w-4" />
@@ -108,7 +162,7 @@ export function Contact() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted transition-colors hover:bg-surface hover:text-foreground"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-none border border-line text-muted transition-colors hover:bg-surface hover:text-foreground"
               >
                 <FaGithub className="h-4 w-4" />
               </a>
@@ -117,7 +171,7 @@ export function Contact() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted transition-colors hover:bg-surface hover:text-foreground"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-none border border-line text-muted transition-colors hover:bg-surface hover:text-foreground"
               >
                 <FaLinkedin className="h-4 w-4" />
               </a>
@@ -127,8 +181,9 @@ export function Contact() {
 
         <Reveal delay={0.15}>
           <form
+            noValidate
             onSubmit={handleSubmit}
-            className="space-y-5 rounded-2xl border border-border bg-surface p-6 md:p-8"
+            className="shadow-block space-y-5 border border-line bg-surface p-6 md:p-8"
           >
             <div className="grid gap-5 sm:grid-cols-2">
               <div>
@@ -143,11 +198,13 @@ export function Contact() {
                   id="name"
                   name="name"
                   autoComplete="name"
+                  placeholder={t("namePlaceholder")}
                   value={formData.name}
                   onChange={handleChange}
-                  required
-                  className={inputClass}
+                  className={`${inputClass} ${errors.name ? invalidInputClass : ""}`}
+                  {...fieldProps("name")}
                 />
+                {errorText("name") && <FieldError id="name-error" message={errorText("name")!} />}
               </div>
 
               <div>
@@ -162,11 +219,14 @@ export function Contact() {
                   id="email"
                   name="email"
                   autoComplete="email"
+                  spellCheck={false}
+                  placeholder={t("emailPlaceholder")}
                   value={formData.email}
                   onChange={handleChange}
-                  required
-                  className={inputClass}
+                  className={`${inputClass} ${errors.email ? invalidInputClass : ""}`}
+                  {...fieldProps("email")}
                 />
+                {errorText("email") && <FieldError id="email-error" message={errorText("email")!} />}
               </div>
             </div>
 
@@ -180,19 +240,23 @@ export function Contact() {
               <textarea
                 id="message"
                 name="message"
+                autoComplete="off"
+                placeholder={t("messagePlaceholder")}
                 value={formData.message}
                 onChange={handleChange}
-                required
                 rows={5}
-                className={`${inputClass} resize-none`}
+                className={`${inputClass} resize-none ${errors.message ? invalidInputClass : ""}`}
+                {...fieldProps("message")}
               />
+              {errorText("message") && (
+                <FieldError id="message-error" message={errorText("message")!} />
+              )}
             </div>
 
             <button
               type="submit"
               disabled={status === "loading"}
-              aria-live="polite"
-              className={`group inline-flex h-12 w-full cursor-pointer items-center justify-center overflow-hidden rounded-full px-6 text-sm font-semibold transition-[opacity,background-color,color] duration-300 disabled:cursor-not-allowed disabled:opacity-70 ${buttonColors[status]}`}
+              className={`group inline-flex h-12 w-full cursor-pointer items-center justify-center overflow-hidden rounded-none px-6 text-sm font-semibold transition-[opacity,background-color,color] duration-300 disabled:cursor-not-allowed disabled:opacity-70 ${buttonColors[status]}`}
             >
               <AnimatePresence mode="wait" initial={false}>
                 <motion.span
@@ -219,18 +283,23 @@ export function Contact() {
               </AnimatePresence>
             </button>
 
+            <div role="status" aria-live="polite">
             <AnimatePresence>
               {status === "error" && (
                 <motion.div
                   initial={{ opacity: 0, y: -8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
-                  className="rounded-lg bg-accent-soft p-3 text-center text-sm font-medium text-accent"
+                  className="border border-danger bg-danger/10 p-3 text-center text-sm font-medium text-danger"
                 >
                   {t("error")}
                 </motion.div>
               )}
             </AnimatePresence>
+            </div>
+            <p role="status" aria-live="polite" className="sr-only">
+              {status === "success" ? t("sent") : ""}
+            </p>
           </form>
         </Reveal>
       </div>

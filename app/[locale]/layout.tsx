@@ -1,7 +1,7 @@
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import "../globals.css";
@@ -25,6 +25,13 @@ const locales = ["es", "eu"] as const;
 const ogLocale: Record<(typeof locales)[number], string> = {
   es: "es_ES",
   eu: "eu_ES",
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fafaf9" },
+    { media: "(prefers-color-scheme: dark)", color: "#0b0b0d" },
+  ],
 };
 
 export function generateStaticParams() {
@@ -85,6 +92,7 @@ export default async function LocaleLayout({
 
   const messages = await getMessages();
   const t = await getTranslations({ locale, namespace: "metadata" });
+  const tNav = await getTranslations({ locale, namespace: "nav" });
   const site = "https://proyectozero.org";
   const localePath = locale === "es" ? "" : `/${locale}`;
 
@@ -143,10 +151,19 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://stats.proyectozero.org" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} bg-background font-sans text-foreground antialiased`}
         suppressHydrationWarning
       >
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-100 focus:rounded-none focus:bg-accent focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-accent-foreground"
+        >
+          {tNav("skipToContent")}
+        </a>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

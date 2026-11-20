@@ -19,6 +19,8 @@
   --warning-soft: #fdf3e2;
   --info: #1d4ed8;
   --info-soft: #e8eefc;
+  --line: #3f3f46;
+  --danger: #c62828;
 }
 
 .dark {
@@ -38,6 +40,8 @@
   --warning-soft: #2a1f0b;
   --info: #93b4ff;
   --info-soft: #141d33;
+  --line: #4a4a52;
+  --danger: #ff6b6b;
 }
 
 @theme inline {
@@ -60,10 +64,50 @@
   --color-warning-soft: var(--warning-soft);
   --color-info: var(--info);
   --color-info-soft: var(--info-soft);
+  --color-line: var(--line);
+  --color-danger: var(--danger);
+
+  /* Esquinas rectas en toda la interfaz */
+  --radius-xs: 0;
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-2xl: 0;
+  --radius-3xl: 0;
 }
 
 html {
   scroll-behavior: smooth;
+  color-scheme: light;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+a,
+button,
+summary,
+[role='button'] {
+  touch-action: manipulation;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+/* Foco visible para teclado en todos los elementos interactivos */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 body {
@@ -157,6 +201,42 @@ section[id] {
 
 .animate-blink {
   animation: blink 1.8s step-end infinite;
+}
+
+/* Bloques: sombra dura estática y elevación al pasar el ratón */
+.shadow-block {
+  box-shadow: 4px 4px 0 0 var(--line);
+}
+
+.lift {
+  transition-property: transform, box-shadow;
+  transition-duration: 200ms;
+}
+
+.lift:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 0 var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lift:hover {
+    transform: none;
+  }
+}
+
+/* Cambio de tema: la capa nueva se recorta con una onda de píxeles (ver lib/pixelThemeTransition.ts) */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 0;
+}
+
+::view-transition-new(root) {
+  z-index: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {

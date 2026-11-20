@@ -43,9 +43,9 @@ function ProjectScreen({ project }: { project: Project }) {
   const clipPath = useTransform(reveal, (v) => `inset(0 0 ${v}% 0)`);
 
   return (
-    <div className="border-b border-border bg-surface-muted">
+    <div className="border-b border-line bg-surface-muted">
       {/* Barra de navegador: siempre visible, nunca se tapa */}
-      <div className="relative z-10 flex h-9 items-center gap-3 border-b border-border bg-surface-muted px-4">
+      <div className="relative z-10 flex h-9 items-center gap-3 border-b border-line bg-surface-muted px-4">
         <div className="flex gap-1.5" aria-hidden>
           <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
           <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
@@ -53,7 +53,7 @@ function ProjectScreen({ project }: { project: Project }) {
         </div>
         <span className="truncate font-mono text-[11px] text-subtle">{domain}</span>
         <span
-          className={`ml-auto inline-flex shrink-0 items-center gap-1.5 rounded-full px-2 py-0.5 text-[11px] font-semibold ${statusStyles[project.status]}`}
+          className={`ml-auto inline-flex shrink-0 items-center gap-1.5 rounded-none px-2 py-0.5 text-[11px] font-semibold ${statusStyles[project.status]}`}
         >
           <span className="h-1.5 w-1.5 rounded-full bg-current" />
           {t(`status.${project.status}`)}
@@ -86,7 +86,7 @@ function ProjectScreen({ project }: { project: Project }) {
           ) : (
             <div className="bg-dots flex h-full flex-col items-center justify-center gap-4">
               {Icon && (
-                <span className="flex h-16 w-16 items-center justify-center rounded-2xl border border-border bg-surface text-accent shadow-sm">
+                <span className="flex h-16 w-16 items-center justify-center border border-line bg-surface text-accent">
                   <Icon className="h-8 w-8" />
                 </span>
               )}
@@ -187,7 +187,7 @@ function ProjectCard({ project }: { project: Project }) {
   return (
     <article
       onMouseMove={handleMouseMove}
-      className="spotlight group relative isolate overflow-hidden rounded-2xl border border-border bg-surface transition-all duration-300 hover:-translate-y-1 hover:border-foreground/20 hover:shadow-xl hover:shadow-black/5 dark:hover:shadow-black/40"
+      className="spotlight group relative isolate overflow-hidden border border-line bg-surface transition-[transform,box-shadow] duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[4px_4px_0_0_var(--accent)] motion-reduce:transition-none motion-reduce:hover:transform-none"
     >
       <ProjectScreen project={project} />
     </article>
@@ -198,7 +198,7 @@ export function Portfolio() {
   const t = useTranslations("portfolio");
 
   return (
-    <section id="portfolio" className="border-t border-border py-24 md:py-32">
+    <section id="portfolio" className="border-t border-line py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeading
           index="03"
@@ -220,7 +220,7 @@ export function Portfolio() {
             href="https://github.com/tarteka"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-surface-muted"
+            className="inline-flex items-center gap-2 rounded-none border border-line bg-surface px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-surface-muted"
           >
             <FaGithub className="h-4 w-4" />
             {t("allGithub")}

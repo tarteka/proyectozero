@@ -78,7 +78,7 @@ export function Skills() {
   return (
     <section
       id="skills"
-      className="border-t border-border bg-surface-muted/40 bg-dots py-24 md:py-32"
+      className="border-t border-line bg-surface-muted/40 bg-dots py-24 md:py-32"
     >
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeading
@@ -91,10 +91,10 @@ export function Skills() {
         <Reveal>
           <div
             onMouseMove={handleMouseMove}
-            className="spotlight overflow-hidden rounded-2xl border border-border bg-surface shadow-sm"
+            className="spotlight shadow-block overflow-hidden border border-line bg-surface"
           >
             {/* Barra de ventana de terminal, como en Portfolio */}
-            <div className="flex h-9 items-center gap-3 border-b border-border bg-surface-muted px-4">
+            <div className="flex h-9 items-center gap-3 border-b border-line bg-surface-muted px-4">
               <div className="flex gap-1.5" aria-hidden>
                 <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
                 <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />

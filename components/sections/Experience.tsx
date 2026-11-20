@@ -84,7 +84,7 @@ export function Experience() {
   return (
     <section
       id="experience"
-      className="border-t border-border bg-surface-muted/40 bg-dots py-24 md:py-32"
+      className="border-t border-line bg-surface-muted/40 bg-dots py-24 md:py-32"
     >
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeading
@@ -109,11 +109,11 @@ export function Experience() {
                 {!isLast && <TimelineLine />}
 
                 <Reveal delay={i * 0.1} className="flex gap-4 md:gap-6">
-                  <span className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-border bg-surface text-accent">
+                  <span className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-line bg-surface text-accent">
                     <job.icon className="h-5 w-5" />
                   </span>
 
-                  <article className="min-w-0 flex-1 rounded-2xl border border-border bg-surface p-6 md:p-7">
+                  <article className="lift min-w-0 flex-1 border border-line bg-surface p-6 md:p-7">
                     <div className="mb-1 flex flex-wrap items-center gap-2">
                       <span className="inline-flex items-center gap-1.5 font-mono text-xs text-subtle">
                         {job.current && (
@@ -154,7 +154,7 @@ export function Experience() {
                                 className={`rounded-md border px-2 py-1 text-xs font-medium ${
                                   j === path.length - 1
                                     ? 'border-accent/40 bg-accent-soft text-accent'
-                                    : 'border-border bg-surface-muted text-muted'
+                                    : 'border-line bg-surface-muted text-muted'
                                 }`}
                               >
                                 {company}
@@ -188,7 +188,7 @@ export function Experience() {
                         {job.stack.map((tech) => (
                           <li
                             key={tech}
-                            className="rounded-md border border-border bg-surface-muted px-2 py-1 font-mono text-[11px] text-muted"
+                            className="rounded-md border border-line bg-surface-muted px-2 py-1 font-mono text-[11px] text-muted"
                           >
                             {tech}
                           </li>

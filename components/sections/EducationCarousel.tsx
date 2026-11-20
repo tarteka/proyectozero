@@ -1,23 +1,24 @@
 "use client";
 
+import { AnimatePresence, motion, type PanInfo } from "framer-motion";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { useRef, useState } from "react";
-import type { IconType } from "react-icons";
+import { useState } from "react";
 import {
   HiAcademicCap,
   HiArrowUpRight,
+  HiCheck,
   HiChevronLeft,
   HiChevronRight,
-  HiDocumentText,
 } from "react-icons/hi2";
-import { FaAmbulance } from "react-icons/fa";
+import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 
 interface Degree {
   id: "daw" | "das" | "tes";
   grade: string;
-  logo?: string;
-  icon?: IconType;
+  logo: string;
+  // Los logos de Easo y Osoki son blancos (para cabeceras oscuras): van sobre fondo oscuro.
+  logoTone: "light" | "dark";
   link?: string;
 }
 
@@ -27,51 +28,73 @@ const degrees: Degree[] = [
     id: "daw",
     grade: "9,00",
     logo: "/images/Birt.svg",
+    logoTone: "light",
     link: "https://www.birt.eus/ciclo-formativo/desarrollo-de-aplicaciones-web/",
   },
   {
     id: "das",
     grade: "9,60",
-    icon: HiDocumentText,
+    logo: "/images/osoki.png",
+    logoTone: "dark",
     link: "https://osoki.eus",
   },
-  { id: "tes", grade: "8,57", icon: FaAmbulance },
+  {
+    id: "tes",
+    grade: "8,57",
+    logo: "/images/easo.png",
+    logoTone: "dark",
+    link: "https://easo.eus/es/heziketa-zikloa/emergencias-sanitarias/",
+  },
 ];
+
+const ease = [0.22, 1, 0.36, 1] as const;
+
+const arrowClass =
+  "cursor-pointer inline-flex h-8 w-8 items-center justify-center border border-line text-foreground transition-colors hover:bg-accent hover:text-accent-foreground disabled:cursor-default disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-foreground";
 
 export function EducationCarousel() {
   const t = useTranslations("about");
-  const trackRef = useRef<HTMLDivElement>(null);
-  const [index, setIndex] = useState(0);
+  const reduceMotion = useReducedMotionSafe();
+  const [[index, direction], setPage] = useState<[number, number]>([0, 1]);
 
-  const goTo = (i: number) => {
-    const track = trackRef.current;
-    if (!track) return;
-    const clamped = Math.max(0, Math.min(i, degrees.length - 1));
-    track.scrollTo({ left: clamped * track.clientWidth, behavior: "smooth" });
+  const goTo = (next: number) => {
+    const clamped = Math.max(0, Math.min(next, degrees.length - 1));
+    if (clamped === index) return;
+    setPage([clamped, clamped > index ? 1 : -1]);
   };
 
-  const handleScroll = () => {
-    const track = trackRef.current;
-    if (!track) return;
-    setIndex(Math.round(track.scrollLeft / track.clientWidth));
+  const handleDragEnd = (_: unknown, info: PanInfo) => {
+    if (info.offset.x < -50) goTo(index + 1);
+    else if (info.offset.x > 50) goTo(index - 1);
   };
 
-  const arrowClass =
-    "cursor-pointer inline-flex h-8 w-8 items-center justify-center rounded-full border border-border text-muted transition-colors hover:border-accent/40 hover:bg-accent-soft hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 disabled:cursor-default disabled:opacity-40 disabled:hover:border-border disabled:hover:bg-transparent disabled:hover:text-muted";
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "ArrowRight") {
+      e.preventDefault();
+      goTo(index + 1);
+    } else if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      goTo(index - 1);
+    }
+  };
+
+  const degree = degrees[index];
+  const shift = reduceMotion ? 0 : 48;
 
   return (
     <div
       role="region"
       aria-roledescription="carousel"
       aria-label={t("education")}
-      className="rounded-2xl border border-border bg-surface"
+      onKeyDown={handleKeyDown}
+      className="border border-line bg-surface transition-[box-shadow,transform] duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[4px_4px_0_0_var(--accent)] motion-reduce:transition-none motion-reduce:hover:transform-none"
     >
-      <div className="flex items-center justify-between px-6 pt-6">
-        <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-subtle">
-          <HiAcademicCap className="h-4 w-4 text-accent" />
+      <div className="flex items-center justify-between border-b border-line bg-surface-muted px-4 py-2.5">
+        <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-muted">
+          <HiAcademicCap className="h-4 w-4 text-accent" aria-hidden />
           {t("education")}
-          <span className="tracking-normal text-subtle/70">
-            {index + 1}/{degrees.length}
+          <span className="tracking-normal text-foreground">
+            {String(index + 1).padStart(2, "0")}/{String(degrees.length).padStart(2, "0")}
           </span>
         </span>
         <div className="flex gap-1.5">
@@ -81,7 +104,7 @@ export function EducationCarousel() {
             aria-label={t("prev")}
             className={arrowClass}
           >
-            <HiChevronLeft className="h-4 w-4" />
+            <HiChevronLeft className="h-4 w-4" aria-hidden />
           </button>
           <button
             onClick={() => goTo(index + 1)}
@@ -89,44 +112,61 @@ export function EducationCarousel() {
             aria-label={t("next")}
             className={arrowClass}
           >
-            <HiChevronRight className="h-4 w-4" />
+            <HiChevronRight className="h-4 w-4" aria-hidden />
           </button>
         </div>
       </div>
 
-      <div
-        ref={trackRef}
-        onScroll={handleScroll}
-        tabIndex={0}
-        className="no-scrollbar flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
-      >
-        {degrees.map((degree, i) => (
-          <div
+      <div className="relative min-h-72 overflow-hidden" aria-live="polite">
+        <AnimatePresence mode="popLayout" initial={false} custom={direction}>
+          <motion.div
             key={degree.id}
             role="group"
             aria-roledescription="slide"
-            aria-label={`${i + 1} / ${degrees.length}`}
-            className="flex w-full shrink-0 snap-start flex-col p-6"
+            aria-label={`${index + 1} / ${degrees.length}`}
+            custom={direction}
+            variants={{
+              enter: (d: number) => ({ x: d * shift, opacity: 0 }),
+              center: { x: 0, opacity: 1 },
+              exit: (d: number) => ({ x: -d * shift, opacity: 0 }),
+            }}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ duration: reduceMotion ? 0.15 : 0.45, ease }}
+            drag={reduceMotion ? false : "x"}
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.2}
+            onDragEnd={handleDragEnd}
+            className="flex min-h-72 flex-col p-6"
           >
-            <div className="flex items-start gap-4">
-              {degree.logo ? (
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-border bg-white p-1.5">
-                  <Image
-                    src={degree.logo}
-                    alt=""
-                    width={40}
-                    height={20}
-                    className="h-auto w-full object-contain"
-                  />
-                </span>
-              ) : (
-                degree.icon && (
-                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-border bg-accent-soft text-accent">
-                    <degree.icon className="h-5 w-5" />
-                  </span>
-                )
-              )}
-              <div>
+            <span
+              className="pointer-events-none absolute right-4 top-2 select-none font-mono text-7xl font-bold leading-none text-accent/15"
+              aria-hidden
+            >
+              {String(index + 1).padStart(2, "0")}
+            </span>
+
+            <motion.div
+              initial={{ opacity: 0, y: reduceMotion ? 0 : 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.08, ease }}
+              className="relative"
+            >
+              <span
+                className={`mb-4 flex h-12 w-32 shrink-0 items-center justify-center border border-line p-2 ${
+                  degree.logoTone === "dark" ? "bg-[#18181b]" : "bg-white"
+                }`}
+              >
+                <Image
+                  src={degree.logo}
+                  alt=""
+                  width={160}
+                  height={48}
+                  className="h-full w-full object-contain"
+                />
+              </span>
+              <div className="min-w-0 pr-14">
                 <h3 className="font-semibold leading-snug text-foreground">
                   {t(`degrees.${degree.id}.title`)}
                 </h3>
@@ -134,14 +174,24 @@ export function EducationCarousel() {
                   {t(`degrees.${degree.id}.school`)}
                 </p>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-3 pt-5">
-              <span className="text-sm text-muted">
-                {t("gradeLabel")}{" "}
-                <span className="font-semibold text-foreground">{degree.grade}</span>
-              </span>
-              <span className="rounded-full bg-success-soft px-2.5 py-1 text-xs font-semibold text-success">
+            <motion.div
+              initial={{ opacity: 0, y: reduceMotion ? 0 : 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.16, ease }}
+              className="relative mt-auto flex flex-wrap items-end gap-x-6 gap-y-3 pt-6"
+            >
+              <div>
+                <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-subtle">
+                  {t("gradeLabel")}
+                </p>
+                <p className="font-mono text-4xl font-bold leading-none tabular-nums text-accent">
+                  {degree.grade}
+                </p>
+              </div>
+              <span className="inline-flex items-center gap-1.5 border border-success px-2.5 py-1 font-mono text-xs font-semibold uppercase tracking-wide text-success">
+                <HiCheck className="h-3.5 w-3.5" aria-hidden />
                 {t("status")}
               </span>
               {degree.link && (
@@ -152,25 +202,34 @@ export function EducationCarousel() {
                   className="group ml-auto inline-flex items-center gap-1 text-sm font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-accent"
                 >
                   {t("moreInfo")}
-                  <HiArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  <HiArrowUpRight
+                    className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                    aria-hidden
+                  />
                 </a>
               )}
-            </div>
-          </div>
-        ))}
+            </motion.div>
+          </motion.div>
+        </AnimatePresence>
       </div>
 
-      <div className="flex justify-center gap-2 pb-5">
-        {degrees.map((degree, i) => (
+      <div className="flex gap-1.5 border-t border-line p-3">
+        {degrees.map((d, i) => (
           <button
-            key={degree.id}
+            key={d.id}
             onClick={() => goTo(i)}
             aria-label={t("goTo", { n: i + 1 })}
             aria-current={index === i}
-            className={`cursor-pointer h-1.5 rounded-full transition-all ${
-              index === i ? "w-6 bg-accent" : "w-1.5 bg-border hover:bg-subtle"
-            }`}
-          />
+            className="group relative h-4 flex-1 cursor-pointer"
+          >
+            <span className="absolute inset-x-0 top-1/2 h-1.5 -translate-y-1/2 bg-border transition-colors group-hover:bg-subtle" />
+            <motion.span
+              className="absolute inset-x-0 top-1/2 h-1.5 origin-left -translate-y-1/2 bg-accent"
+              initial={false}
+              animate={{ scaleX: index === i ? 1 : 0 }}
+              transition={{ duration: reduceMotion ? 0.1 : 0.45, ease }}
+            />
+          </button>
         ))}
       </div>
     </div>
