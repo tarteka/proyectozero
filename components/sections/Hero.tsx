@@ -235,7 +235,7 @@ export function Hero() {
       ref={sectionRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative overflow-hidden pt-32 pb-20 md:pt-44 md:pb-32"
+      className="relative flex min-h-svh flex-col justify-center overflow-hidden pt-28 pb-16 md:pt-32 md:pb-20"
     >
       <motion.div
         style={{ y: reduceMotion ? 0 : gridY }}
