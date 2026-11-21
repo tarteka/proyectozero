@@ -16,9 +16,8 @@
 # next.js
 /.next/
 /out/
-# generados automáticamente por `next dev`/`next build` (agentRules)
-/AGENTS.md
-/CLAUDE.md
+# Claude Code: ajustes locales (AGENTS.md, CLAUDE.md y .claude/ sí se versionan)
+.claude/settings.local.json
 
 # production
 /build
