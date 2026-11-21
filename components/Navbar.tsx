@@ -23,17 +23,18 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Resalta el enlace de la sección visible
+  // Resalta el enlace de la sección visible. La portada (#top) también se
+  // observa para quitar el resaltado cuando se vuelve al inicio.
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) setActive(entry.target.id);
+          if (entry.isIntersecting) setActive(entry.target.id === "top" ? null : entry.target.id);
         });
       },
       { rootMargin: "-45% 0px -50% 0px" },
     );
-    sections.forEach((id) => {
+    ["top", ...sections].forEach((id) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
     });
