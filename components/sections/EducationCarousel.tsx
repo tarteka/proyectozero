@@ -5,9 +5,7 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useState } from "react";
 import {
-  HiAcademicCap,
   HiArrowUpRight,
-  HiCheck,
   HiChevronLeft,
   HiChevronRight,
 } from "react-icons/hi2";
@@ -90,11 +88,10 @@ export function EducationCarousel() {
       className="border border-line bg-surface transition-[box-shadow,transform] duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[4px_4px_0_0_var(--accent)] motion-reduce:transition-none motion-reduce:hover:transform-none"
     >
       <div className="flex items-center justify-between border-b border-line bg-surface-muted px-4 py-2.5">
-        <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-muted">
-          <HiAcademicCap className="h-4 w-4 text-accent" aria-hidden />
+        <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-foreground">
           {t("education")}
-          <span className="tracking-normal text-foreground">
-            {String(index + 1).padStart(2, "0")}/{String(degrees.length).padStart(2, "0")}
+          <span className="sr-only">
+            {index + 1}/{degrees.length}
           </span>
         </span>
         <div className="flex gap-1.5">
@@ -190,10 +187,6 @@ export function EducationCarousel() {
                   {degree.grade}
                 </p>
               </div>
-              <span className="inline-flex items-center gap-1.5 border border-success px-2.5 py-1 font-mono text-xs font-semibold uppercase tracking-wide text-success">
-                <HiCheck className="h-3.5 w-3.5" aria-hidden />
-                {t("status")}
-              </span>
               {degree.link && (
                 <a
                   href={degree.link}

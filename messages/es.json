@@ -35,7 +35,6 @@
     "focusValue": "Backend",
     "focusLabel": "mi especialidad",
     "education": "Formación",
-    "status": "Titulado",
     "moreInfo": "Más información",
     "gradeLabel": "Nota media",
     "prev": "Título anterior",
@@ -66,6 +65,7 @@
         "company": "Ambulancias Gipuzkoa",
         "location": "Gipuzkoa",
         "period": "Actualidad",
+        "marker": "Actualidad",
         "meta": "",
         "bullets": [
           "Diseño y desarrollo de software a medida para digitalizar la operativa diaria de la empresa.",
@@ -78,6 +78,7 @@
         "company": "HispaVista, S.L.",
         "location": "Donostia / San Sebastián",
         "period": "2026",
+        "marker": "2026",
         "meta": "364 horas",
         "bullets": [
           "API REST con Symfony y arquitectura DDD + hexagonal (Domain / Application / Infrastructure, Value Objects, repositorios).",
@@ -90,6 +91,7 @@
         "company": "Red de Transporte Sanitario Urgente (RTSU) de Gipuzkoa · Osakidetza – Servicio Vasco de Salud",
         "location": "",
         "period": "20+ años",
+        "marker": "20+",
         "meta": "",
         "path": [
           "Cruz Roja",

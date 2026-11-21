@@ -35,7 +35,6 @@
     "focusValue": "Backend",
     "focusLabel": "nire espezialitatea",
     "education": "Prestakuntza",
-    "status": "Titulatua",
     "moreInfo": "Informazio gehiago",
     "gradeLabel": "Batez besteko nota",
     "prev": "Aurreko titulua",
@@ -66,6 +65,7 @@
         "company": "Ambulancias Gipuzkoa",
         "location": "Gipuzkoa",
         "period": "Gaur egun",
+        "marker": "Gaur egun",
         "meta": "",
         "bullets": [
           "Neurrira egindako softwarea diseinatu eta garatzen dut enpresaren eguneroko jarduera digitalizatzeko.",
@@ -78,6 +78,7 @@
         "company": "HispaVista, S.L.",
         "location": "Donostia",
         "period": "2026",
+        "marker": "2026",
         "meta": "364 ordu",
         "bullets": [
           "REST APIa Symfonyrekin eta DDD + arkitektura hexagonalarekin (Domain / Application / Infrastructure, Value Objects, biltegiak).",
@@ -90,6 +91,7 @@
         "company": "Gipuzkoako Premiazko Osasun Garraioaren Sarea (RTSU) · Osakidetza – Euskal osasun zerbitzua",
         "location": "",
         "period": "20+ urte",
+        "marker": "20+",
         "meta": "",
         "path": [
           "Gurutze Gorria",

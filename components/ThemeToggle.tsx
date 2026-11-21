@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { flushSync } from "react-dom";
 import { pixelThemeTransition } from "@/lib/pixelThemeTransition";
 
-export function ThemeToggle() {
+export function ThemeToggle({ onToggle }: { onToggle?: () => void }) {
   const t = useTranslations("nav");
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -37,7 +37,10 @@ export function ThemeToggle() {
       root.classList.remove("light", "dark");
       root.classList.add(next);
       root.style.colorScheme = next;
-      flushSync(() => setTheme(next));
+      flushSync(() => {
+        setTheme(next);
+        onToggle?.();
+      });
     });
   };
 

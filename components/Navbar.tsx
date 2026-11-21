@@ -128,7 +128,7 @@ export function Navbar() {
               ))}
               <li className="flex items-center gap-2 pt-4 sm:hidden">
                 <LanguageToggle />
-                <ThemeToggle />
+                <ThemeToggle onToggle={() => setOpen(false)} />
               </li>
             </ul>
           </motion.div>

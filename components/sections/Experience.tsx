@@ -3,14 +3,10 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { useRef } from 'react';
-import type { IconType } from 'react-icons';
-import { FaAmbulance } from 'react-icons/fa';
 import {
   HiArrowUpRight,
   HiChevronDown,
   HiChevronRight,
-  HiCodeBracket,
-  HiCommandLine,
 } from 'react-icons/hi2';
 import { Reveal } from '@/components/ui/Reveal';
 import { useReducedMotionSafe } from '@/lib/useReducedMotionSafe';
@@ -18,7 +14,6 @@ import { SectionHeading } from '@/components/ui/SectionHeading';
 
 interface Job {
   id: 'ambulancias' | 'hispavista' | 'tes';
-  icon: IconType;
   current?: boolean;
   stack?: string[];
   url?: string;
@@ -28,7 +23,6 @@ interface Job {
 const jobs: Job[] = [
   {
     id: 'ambulancias',
-    icon: HiCommandLine,
     current: true,
     url: 'https://ambulanciasgipuzkoa.eus/',
     stack: [
@@ -46,11 +40,10 @@ const jobs: Job[] = [
   },
   {
     id: 'hispavista',
-    icon: HiCodeBracket,
     url: 'https://hispavistalabs.com/',
     stack: ['PHP', 'Symfony', 'DDD', 'Hexagonal', 'MongoDB', 'Docker Compose', 'Nginx', 'GitLab'],
   },
-  { id: 'tes', icon: FaAmbulance },
+  { id: 'tes' },
 ];
 
 function TimelineLine() {
@@ -60,7 +53,7 @@ function TimelineLine() {
   const arrowOpacity = useTransform(scrollYProgress, [0.85, 1], [0, 1]);
 
   return (
-    <div ref={ref} aria-hidden className="absolute left-5 top-10 bottom-0 w-px bg-border">
+    <div ref={ref} aria-hidden className="absolute left-10 top-10 bottom-0 w-px bg-border md:left-12">
       <motion.div
         style={{ scaleY: reduceMotion ? 1 : scrollYProgress }}
         className="absolute inset-0 origin-top bg-accent"
@@ -109,19 +102,12 @@ export function Experience() {
                 {!isLast && <TimelineLine />}
 
                 <Reveal delay={i * 0.1} className="flex gap-4 md:gap-6">
-                  <span className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-line bg-surface text-accent">
-                    <job.icon className="h-5 w-5" />
+                  <span className="relative z-10 flex h-10 w-20 shrink-0 items-center justify-center border border-line bg-surface font-mono text-[10px] font-medium text-accent md:w-24 md:text-[11px]">
+                    <span aria-hidden>{t(`items.${job.id}.marker`)}</span>
+                    <span className="sr-only">{t(`items.${job.id}.period`)}</span>
                   </span>
 
                   <article className="lift min-w-0 flex-1 border border-line bg-surface p-6 md:p-7">
-                    <div className="mb-1 flex flex-wrap items-center gap-2">
-                      <span className="inline-flex items-center gap-1.5 font-mono text-xs text-subtle">
-                        {job.current && (
-                          <span className="h-1.5 w-1.5 rounded-full bg-success" aria-hidden />
-                        )}
-                        {t(`items.${job.id}.period`)}
-                      </span>
-                    </div>
                     <h3 className="text-lg font-semibold tracking-tight text-foreground md:text-xl">
                       {t(`items.${job.id}.role`)}
                     </h3>
