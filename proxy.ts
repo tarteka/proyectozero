@@ -7,5 +7,7 @@ export default createMiddleware({
 });
 
 export const config = {
-  matcher: "/((?!api|_next|_vercel|.*\\..*).*)",
+  // /sideral/privacidad es una página estática (public/sideral/privacidad/index.html)
+  // que no debe pasar por el enrutado de idiomas.
+  matcher: "/((?!api|_next|_vercel|sideral(?:/|$)|.*\\..*).*)",
 };

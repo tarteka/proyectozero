@@ -16,6 +16,17 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async rewrites() {
+    return {
+      beforeFiles: [
+        {
+          // Sirve el HTML estático en /sideral/privacidad (sin barra final ni .html).
+          source: "/sideral/privacidad",
+          destination: "/sideral/privacidad/index.html",
+        },
+      ],
+    };
+  },
 };
 
 export default withNextIntl(nextConfig);
