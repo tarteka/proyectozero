@@ -1,0 +1,45 @@
+export const metadata = {
+  title: "Adibidezko artikulu elebiduna",
+  description:
+    "Bloga probatzeko adibidezko artikulua. Ez da behin betiko edukia eta zirriborro gisa mantentzen da.",
+  date: "2026-11-20",
+  tags: ["Adibidea", "Next.js", "MDX"],
+  draft: true,
+};
+
+## Adibidezko edukia
+
+Fitxategi hau blogaren funtzionamendua probatzeko baino ez da: zerrenda,
+artikulua, itzulpenak, estiloak eta metadatuak. Ez da benetako artikulua.
+
+Izen bereko fitxategia egon behar du `content/blog/es/` eta
+`content/blog/eu/` karpetetan, bertsio biak itzulpen gisa hartzeko.
+
+### Zerrendak eta estekak
+
+- Adibidezko elementu bat.
+- Beste elementu bat `kode lerrokoa`-rekin.
+- Esteka bat [azaleko orrira](/#top).
+
+### Kode blokea
+
+```ts
+type Adibidea = {
+  slug: string;
+  locale: "es" | "eu";
+};
+
+export function adibidea(slug: string): Adibidea {
+  return { slug, locale: "eu" };
+}
+```
+
+### Irudia
+
+![Adibidezko pantaila-argazkia](/images/projects/divisas.png)
+
+> Hau adibidezko aipamen bloke bat da, estilo editoriala probatzeko.
+
+## Amaiera
+
+Edukia hemen amaitzen da. Zirriborro hau ez da produkzioan agertuko.

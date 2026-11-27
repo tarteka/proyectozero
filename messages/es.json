@@ -9,6 +9,7 @@
     "portfolio": "Portafolio",
     "skills": "Stack",
     "contact": "Contacto",
+    "blog": "Blog",
     "openMenu": "Abrir menú",
     "closeMenu": "Cerrar menú",
     "toggleTheme": "Cambiar tema",
@@ -171,6 +172,46 @@
       "emailRequired": "Escribe tu email.",
       "emailInvalid": "Escribe un email válido, por ejemplo tu@email.com.",
       "messageRequired": "Escribe tu mensaje."
+    }
+  },
+  "blog": {
+    "metaTitle": "Blog de desarrollo web | ProyectoZero",
+    "metaDescription": "Artículos sobre desarrollo web, backend, arquitectura y aprendizaje continuo.",
+    "eyebrow": "blog",
+    "title": "Blog",
+    "description": "Notas sobre desarrollo web, backend y las decisiones técnicas que voy tomando por el camino.",
+    "emptyTitle": "Todavía no hay artículos publicados",
+    "emptyDescription": "Cuando publique el primer artículo aparecerá aquí, ordenado por fecha.",
+    "emptyCommand": "$ ls content/blog/{locale}",
+    "publishedOn": "Publicado el",
+    "tagsLabel": "Etiquetas",
+    "readArticle": "Leer artículo",
+    "filter": {
+      "active": "Etiqueta: {tag}",
+      "clear": "Mostrar todos",
+      "empty": "No hay artículos con la etiqueta «{tag}».",
+      "apply": "Filtrar por {tag}",
+      "remove": "Quitar filtro {tag}"
+    },
+    "pagination": {
+      "label": "Paginación del blog",
+      "previous": "Anterior",
+      "next": "Siguiente",
+      "current": "Página {page} de {total}"
+    },
+    "backToBlog": "Volver al blog",
+    "draft": "Borrador",
+    "languages": {
+      "es": { "name": "español", "in": "en español" },
+      "eu": { "name": "euskera", "in": "en euskera" }
+    },
+    "translationMissing": {
+      "eyebrow": "Contenido no traducido",
+      "title": "Este artículo solo está disponible en {language}",
+      "description": "Todavía no hay una versión en {requestedLanguage}. Puedes leer el artículo original en {language}.",
+      "readOriginal": "Leer en {language}",
+      "metaTitle": "Artículo disponible solo en {language} | Blog",
+      "metaDescription": "Este artículo todavía no está traducido a {requestedLanguage}. Lee la versión original en {language}."
     }
   },
   "footer": {

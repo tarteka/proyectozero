@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { BlogNavigationTransition } from "@/components/providers/BlogNavigationTransition";
 
 // Este layout NO depende del idioma en la ruta: al cambiar de idioma React no
 // lo desmonta, así que <html>, el tema, las fuentes y el script de estadísticas
@@ -55,6 +56,7 @@ export default async function RootLayout({
           enableSystem
           storageKey="proyectozero-theme"
         >
+          <BlogNavigationTransition />
           {children}
         </ThemeProvider>
       </body>

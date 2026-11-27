@@ -7,7 +7,7 @@ const STEPS = 28;
 const DURATION = 900;
 const COLUMNS = 24;
 
-function buildFrames(x: number, y: number, width: number, height: number) {
+export function buildPixelFrames(x: number, y: number, width: number, height: number) {
   const size = Math.max(36, Math.ceil(Math.max(width, height) / COLUMNS));
   const cols = Math.ceil(width / size);
   const rows = Math.ceil(height / size);
@@ -68,7 +68,7 @@ export function pixelThemeTransition(origin: HTMLElement, applyTheme: () => void
   transition.ready
     .then(() => {
       document.documentElement.animate(
-        { clipPath: buildFrames(x, y, width, height) },
+        { clipPath: buildPixelFrames(x, y, width, height) },
         {
           duration: DURATION,
           easing: "linear",

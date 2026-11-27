@@ -1,7 +1,8 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { HiMenuAlt4, HiX } from "react-icons/hi";
 import { Logo } from "@/components/ui/Logo";
@@ -12,9 +13,17 @@ const sections = ["about", "experience", "portfolio", "skills", "contact"] as co
 
 export function Navbar() {
   const t = useTranslations("nav");
+  const locale = useLocale();
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<string | null>(null);
+
+  const homePath = locale === "es" ? "/" : `/${locale}`;
+  const blogPath = locale === "es" ? "/blog" : `/${locale}/blog`;
+  const isHome = pathname === homePath || pathname === `${homePath}/`;
+  const isBlog = pathname === blogPath || pathname.startsWith(`${blogPath}/`);
+  const sectionHref = (id: string) => (isHome ? `#${id}` : `${homePath}#${id}`);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -26,6 +35,11 @@ export function Navbar() {
   // Resalta el enlace de la sección visible. La portada (#top) también se
   // observa para quitar el resaltado cuando se vuelve al inicio.
   useEffect(() => {
+    // La navbar permanece montada entre rutas: descartar la sección anterior.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setActive(null);
+    if (!isHome) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -39,7 +53,7 @@ export function Navbar() {
       if (el) observer.observe(el);
     });
     return () => observer.disconnect();
-  }, []);
+  }, [isHome, pathname]);
 
   return (
     <header
@@ -50,7 +64,11 @@ export function Navbar() {
       }`}
     >
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-        <a href="#top" aria-label="proyectozero.org" onClick={() => setOpen(false)}>
+        <a
+          href={isHome ? "#top" : homePath}
+          aria-label="proyectozero.org"
+          onClick={() => setOpen(false)}
+        >
           <Logo />
         </a>
 
@@ -58,15 +76,15 @@ export function Navbar() {
           {sections.map((id) => (
             <li key={id}>
               <a
-                href={`#${id}`}
-                aria-current={active === id ? "location" : undefined}
+                href={sectionHref(id)}
+                aria-current={isHome && active === id ? "location" : undefined}
                 className={`relative isolate block rounded-none border border-transparent px-3.5 py-2 text-sm transition-colors ${
-                  active === id
+                  isHome && active === id
                     ? "font-medium text-accent"
                     : "text-muted hover:border-line hover:bg-surface-muted hover:text-foreground"
                 }`}
               >
-                {active === id && (
+                {isHome && active === id && (
                   <motion.span
                     layoutId="nav-active"
                     className="absolute -inset-px -z-10 rounded-none border border-accent bg-accent-soft"
@@ -77,6 +95,26 @@ export function Navbar() {
               </a>
             </li>
           ))}
+          <li>
+            <a
+              href={blogPath}
+              aria-current={isBlog ? "location" : undefined}
+              className={`relative isolate block rounded-none border border-transparent px-3.5 py-2 text-sm transition-colors ${
+                isBlog
+                  ? "font-medium text-accent"
+                  : "text-muted hover:border-line hover:bg-surface-muted hover:text-foreground"
+              }`}
+            >
+              {isBlog && (
+                <motion.span
+                  layoutId="nav-active"
+                  className="absolute -inset-px -z-10 rounded-none border border-accent bg-accent-soft"
+                  transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                />
+              )}
+              {t("blog")}
+            </a>
+          </li>
         </ul>
 
         <div className="flex items-center gap-2">
@@ -108,8 +146,15 @@ export function Navbar() {
               {sections.map((id) => (
                 <li key={id}>
                   <a
-                    href={`#${id}`}
+                    href={sectionHref(id)}
                     onClick={(e) => {
+                      // Desde una página que no es la portada, el enlace debe
+                      // navegar a la portada con el hash. Solo se intercepta en
+                      // la portada, donde la sección ya está montada.
+                      if (!isHome) {
+                        setOpen(false);
+                        return;
+                      }
                       // Se desplaza manualmente tras cerrar el menú: si el
                       // salto nativo ocurre mientras el desplegable todavía
                       // se está colapsando, el cambio de layout lo cancela
@@ -120,13 +165,23 @@ export function Navbar() {
                         document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
                       }, 300);
                     }}
-                    aria-current={active === id ? "location" : undefined}
-                    className={`block py-3 text-lg font-medium ${active === id ? "text-accent" : "text-foreground"}`}
+                    aria-current={isHome && active === id ? "location" : undefined}
+                    className={`block py-3 text-lg font-medium ${isHome && active === id ? "text-accent" : "text-foreground"}`}
                   >
                     {t(id)}
                   </a>
                 </li>
               ))}
+              <li>
+                <a
+                  href={blogPath}
+                  onClick={() => setOpen(false)}
+                  aria-current={isBlog ? "location" : undefined}
+                  className={`block py-3 text-lg font-medium ${isBlog ? "text-accent" : "text-foreground"}`}
+                >
+                  {t("blog")}
+                </a>
+              </li>
               <li className="flex items-center gap-2 pt-4 sm:hidden">
                 <LanguageToggle />
                 <ThemeToggle onToggle={() => setOpen(false)} />

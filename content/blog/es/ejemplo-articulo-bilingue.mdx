@@ -1,0 +1,45 @@
+export const metadata = {
+  title: "Ejemplo de artículo bilingüe",
+  description:
+    "Artículo de ejemplo para comprobar el blog. No es contenido definitivo y se mantiene como borrador.",
+  date: "2026-11-20",
+  tags: ["Ejemplo", "Next.js", "MDX"],
+  draft: true,
+};
+
+## Contenido de ejemplo
+
+Este archivo solo sirve para comprobar el funcionamiento del blog: listado,
+artículo, traducciones, estilos y metadatos. No es un artículo real.
+
+El mismo nombre de archivo debe existir en `content/blog/es/` y en
+`content/blog/eu/` para que ambas versiones se consideren traducciones.
+
+### Listas y enlaces
+
+- Un elemento de ejemplo.
+- Otro elemento con `código en línea`.
+- Un enlace a [la portada](/#top).
+
+### Bloque de código
+
+```ts
+type Ejemplo = {
+  slug: string;
+  locale: "es" | "eu";
+};
+
+export function ejemplo(slug: string): Ejemplo {
+  return { slug, locale: "es" };
+}
+```
+
+### Imagen
+
+![Captura de ejemplo](/images/projects/divisas.png)
+
+> Este es un bloque de cita de ejemplo para comprobar el estilo editorial.
+
+## Cierre
+
+El contenido termina aquí. Este borrador no aparecerá en producción.

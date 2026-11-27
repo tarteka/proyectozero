@@ -9,6 +9,7 @@
     "portfolio": "Portfolioa",
     "skills": "Stack-a",
     "contact": "Kontaktua",
+    "blog": "Bloga",
     "openMenu": "Menua ireki",
     "closeMenu": "Menua itxi",
     "toggleTheme": "Gaia aldatu",
@@ -171,6 +172,46 @@
       "emailRequired": "Idatzi zure emaila.",
       "emailInvalid": "Idatzi baliozko email helbide bat, adibidez zu@emaila.com.",
       "messageRequired": "Idatzi zure mezua."
+    }
+  },
+  "blog": {
+    "metaTitle": "Web garapeneko bloga | ProyectoZero",
+    "metaDescription": "Web garapenari, backendari, arkitekturari eta etengabeko ikaskuntzari buruzko artikuluak.",
+    "eyebrow": "blog",
+    "title": "Bloga",
+    "description": "Web garapenari, backendari eta bidean hartzen ditudan erabaki teknikoei buruzko oharrak.",
+    "emptyTitle": "Oraindik ez dago argitaratutako artikulurik",
+    "emptyDescription": "Lehen artikulua argitaratzean hemen agertuko da, dataren arabera ordenatuta.",
+    "emptyCommand": "$ ls content/blog/{locale}",
+    "publishedOn": "Argitaratze-data",
+    "tagsLabel": "Etiketak",
+    "readArticle": "Artikulua irakurri",
+    "filter": {
+      "active": "Etiketa: {tag}",
+      "clear": "Erakutsi guztiak",
+      "empty": "Ez dago «{tag}» etiketa duen artikulurik.",
+      "apply": "Iragazi {tag} etiketaren arabera",
+      "remove": "Kendu {tag} iragazkia"
+    },
+    "pagination": {
+      "label": "Blogaren orrikatzea",
+      "previous": "Aurrekoa",
+      "next": "Hurrengoa",
+      "current": "{page}. orria, {total}tik"
+    },
+    "backToBlog": "Blogera itzuli",
+    "draft": "Zirriborroa",
+    "languages": {
+      "es": { "name": "gaztelania", "in": "gaztelaniaz" },
+      "eu": { "name": "euskara", "in": "euskaraz" }
+    },
+    "translationMissing": {
+      "eyebrow": "Itzuli gabeko edukia",
+      "title": "Artikulu hau {languageIn} baino ez dago erabilgarri",
+      "description": "Oraindik ez dago bertsiorik {requestedLanguageIn}. Jatorrizko artikulua {languageIn} irakur dezakezu.",
+      "readOriginal": "Irakurri {languageIn}",
+      "metaTitle": "Artikulua {languageIn} soilik | Bloga",
+      "metaDescription": "Artikulu hau oraindik ez dago {requestedLanguageIn} itzulita. Irakurri jatorrizkoa {languageIn}."
     }
   },
   "footer": {
